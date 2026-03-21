@@ -27,15 +27,12 @@ export const useAuthStore = create<AuthState>()(
       isHydrated: false,
 
       setAuth: (user, token, remember) => {
+        set({ user, token });
         if (remember) {
-          localStorage.setItem(STORAGE_KEYS.TOKEN, token);
-          localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
           localStorage.setItem(STORAGE_KEYS.REMEMBER, "true");
         } else {
           localStorage.removeItem(STORAGE_KEYS.REMEMBER);
         }
-
-        set({ user, token });
       },
 
       logout: () => {
