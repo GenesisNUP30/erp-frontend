@@ -10,5 +10,5 @@ export default function useLogin() {
         return response;
     };
 
-    return login;
+    return { login };
 }
