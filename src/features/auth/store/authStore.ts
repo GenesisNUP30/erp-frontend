@@ -46,7 +46,7 @@ export const useAuthStore = create<AuthState>()(
       setHydrated: () => set({ isHydrated: true }),
     }),
     {
-      name: "auth-storage", // Clave explícita para LocalStorage
+      name: STORAGE_KEYS.AUTH,
       onRehydrateStorage: () => (state) => {
         state?.setHydrated();
       },
