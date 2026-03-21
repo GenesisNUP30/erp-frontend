@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { STORAGE_KEYS } from "../../../constants/storageKeys";
+import type { Role } from "../../../constants/roles";
 
 interface User {
   id: number;
   name: string;
   username: string;
-  rol: string;
+  rol: Role;
 }
 
 interface AuthState {
