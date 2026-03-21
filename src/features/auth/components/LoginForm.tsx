@@ -2,31 +2,50 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../schemas/authSchema";
 import useLogin from "../hooks/useLogin";
+import { useState } from "react";
 
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+} from "@mui/material";
 
 export default function LoginForm() {
   const { login } = useLogin();
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      login: "",
+      password: "",
+      remember: false,
+    },
   });
 
   const onSubmit = async (data: any) => {
+    setLoginError(null);
     try {
       await login(data);
       console.log("login correcto");
     } catch (error) {
-      console.error("Error en el login:", error);
+      setLoginError("Credenciales incorrectas o error de servidor");
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {loginError && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {loginError}
+        </Alert>
+      )}
       <TextField
         label="Email o Usuario *"
         fullWidth
@@ -45,7 +64,7 @@ export default function LoginForm() {
         inputProps={{ maxLength: 255 }}
         {...register("password")}
         error={!!errors.password}
-        helperText={errors.password?.message}
+        helperText={errors.password?.message as string}
       />
 
       <FormControlLabel
@@ -53,7 +72,14 @@ export default function LoginForm() {
         label="Recordar credenciales"
       />
 
-      <Button type="submit" variant="contained" fullWidth>
+      <Button
+        type="submit"
+        variant="contained"
+        fullWidth
+        disabled={isSubmitting}
+        sx={{ mt: 2 }}
+      >
+        {isSubmitting ? "Entrando..." : ''}
         Iniciar sesión
       </Button>
     </form>
