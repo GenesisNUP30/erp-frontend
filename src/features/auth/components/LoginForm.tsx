@@ -53,7 +53,7 @@ export default function LoginForm() {
         inputProps={{ maxLength: 255 }}
         {...register("login")}
         error={!!errors.login}
-        helperText={errors.login?.message}
+        helperText={errors.login?.message as string}
       />
 
       <TextField
