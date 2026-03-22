@@ -6,5 +6,5 @@ export const loginRequest = async (
 ): Promise<AuthResponse> => {
   const response = await apiClient.post('/login', data);
 
-  return response.data;
+  return response.data.data;
 };

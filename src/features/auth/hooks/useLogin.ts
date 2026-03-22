@@ -21,7 +21,7 @@ export default function useLogin() {
 
       // 3. Redirigir al Dashboard inmediatamente
       console.log("Navegando a:", ROUTES.DASHBOARD);
-      navigate(ROUTES.DASHBOARD, { replace: true });
+      navigate(ROUTES.DASHBOARD);
 
       return response;
     } catch (error) {
