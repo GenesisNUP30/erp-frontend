@@ -1,19 +1,17 @@
-import { Grid, Button } from '@mui/material';
+import Grid from '@mui/material/Grid'; // Importación de la versión moderna
+import { Button } from '@mui/material';
 
 export default function QuickActions() {
   return (
+    // Grid2 ya sabe manejar el espaciado de sus hijos directos
     <Grid container spacing={2} sx={{ mt: 2 }}>
-      {/* <Grid item> */}
-        <Button variant="contained">
-          Nueva Recolección
-        </Button>
-      {/* </Grid> */}
+      <Button variant="contained">
+        Nueva Recolección
+      </Button>
 
-      {/* <Grid item> */}
-        <Button variant="outlined">
-          Ver Parcelas
-        </Button>
-      </Grid>
-    // </Grid>
+      <Button variant="outlined">
+        Ver Parcelas
+      </Button>
+    </Grid>
   );
 }
