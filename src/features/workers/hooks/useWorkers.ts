@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Worker } from '../types/IWorkers';
-import { getWorkersRequest } from '../services/workersServices';
+import { getWorkersRequest } from '../services/workersService';
 
 export default function useWorkers() {
   const [workers, setWorkers] = useState<Worker[]>([]);
