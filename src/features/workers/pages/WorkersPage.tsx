@@ -1,7 +1,7 @@
-import { Box, Typography, CircularProgress } from '@mui/material';
-import useWorkers from '../hooks/useWorkers';
-import WorkersFilters from '../components/WorkersFilters';
-import WorkersTable from '../components/WorkersTable';
+import { Box, Typography, CircularProgress } from "@mui/material";
+import useWorkers from "../hooks/useWorkers";
+import WorkersFilters from "../components/list/WorkersFilters";
+import WorkersTable from "../components/list/WorkersTable";
 
 export default function WorkersPage() {
   const { workers, search, setSearch, loading } = useWorkers();
@@ -14,10 +14,7 @@ export default function WorkersPage() {
       </Typography>
 
       {/* FILTROS */}
-      <WorkersFilters
-        search={search}
-        onSearchChange={setSearch}
-      />
+      <WorkersFilters search={search} onSearchChange={setSearch} />
 
       {/* CONTENIDO */}
       {loading ? (

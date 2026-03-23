@@ -5,8 +5,8 @@ import {
   TableCell,
   TableBody,
   Chip,
-} from '@mui/material';
-import type { Worker } from '../types/IWorkers';
+} from "@mui/material";
+import type { Worker } from "../../types/IWorkers";
 
 interface Props {
   workers: Worker[];
@@ -42,8 +42,8 @@ export default function WorkersTable({ workers }: Props) {
             <TableCell>{worker.fecha_alta}</TableCell>
             <TableCell>
               <Chip
-                label={worker.fecha_baja ? 'Inactivo' : 'Activo'}
-                color={worker.fecha_baja ? 'default' : 'success'}
+                label={worker.fecha_baja ? "Inactivo" : "Activo"}
+                color={worker.fecha_baja ? "default" : "success"}
               />
             </TableCell>
           </TableRow>
