@@ -4,6 +4,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { ROUTES } from "./routes";
 import LoginPage from "../features/auth/pages/LoginPage";
 import MainLayout from "../components/layouts/MainLayout";
+import WorkersPage from "../features/workers/pages/WorkersPage";
 
 
 export default function AppRouter() {
@@ -19,6 +20,7 @@ export default function AppRouter() {
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
           <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+          <Route path={ROUTES.WORKERS} element={<WorkersPage />} />
         </Route>
       </Route>
     </Routes>
