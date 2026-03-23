@@ -1,15 +1,28 @@
 import apiClient from "../../../api/apiClient";
+import type { Role } from "../../../constants/roles";
 import type { Worker } from "../types/IWorkers";
+
+
+export type CreateWorkerDTO = {
+  name: string;
+  username: string;
+  email: string;
+  password?: string; 
+  dni: string;
+  telefono: string;
+  rol: Role;
+  fecha_alta: string;
+};
 
 /**
  * Tipado estándar de respuesta de Laravel
  */
-type ApiResponse<T> = {
+interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
   count?: number;
-};
+}
 
 /**
  * GET - Listado de trabajadores
