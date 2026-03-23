@@ -1,3 +1,7 @@
+import { useAuthStore } from '../../features/auth/store/authStore';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../routes/routes';
+
 import {
   AppBar,
   Toolbar,
@@ -7,10 +11,6 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-import { useAuthStore } from '../../features/auth/store/authStore';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../routes/routes';
 
 interface NavbarProps {
   toggleSidebar: () => void;
@@ -59,3 +59,4 @@ export default function Navbar({ toggleSidebar }: NavbarProps) {
     </AppBar>
   );
 }
+
