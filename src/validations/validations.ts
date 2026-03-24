@@ -8,6 +8,16 @@ const validations = {
     workers: {
       singular: "trabajador",
       plural: "trabajadores",
+      labels: {
+        name: "Nombre completo",
+        username: "Nombre de usuario",
+        email: "Correo electrónico",
+        dni: "DNI / NIE",
+        telefono: "Teléfono de contacto",
+        rol: "Rol en la empresa",
+        fecha_alta: "Fecha de alta",
+        password: "Contraseña",
+      },
       // Mensajes de éxito estándar
       createdSuccess: "¡El trabajador ha sido creado exitosamente!",
       updatedSuccess: "¡El trabajador ha sido actualizado exitosamente!",
