@@ -1,18 +1,5 @@
 import apiClient from "../../../api/apiClient";
-import type { Role } from "../../../constants/roles";
-import type { Worker } from "../types/IWorkers";
-
-
-export type CreateWorkerDTO = {
-  name: string;
-  username: string;
-  email: string;
-  password?: string; 
-  dni: string;
-  telefono: string;
-  rol: Role;
-  fecha_alta: string;
-};
+import type { CreateWorkerDTO } from "../types/IWorkers";
 
 /**
  * Tipado estándar de respuesta de Laravel
@@ -47,7 +34,7 @@ export const getWorkersRequest = async (): Promise<Worker[]> => {
  * POST - Crear trabajador
  */
 export const createWorkerRequest = async (
-  data: Partial<Worker>,
+  data: CreateWorkerDTO,
 ): Promise<ApiResponse<Worker>> => {
   try {
     const response = await apiClient.post<ApiResponse<Worker>>(
