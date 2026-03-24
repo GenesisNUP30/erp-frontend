@@ -13,7 +13,7 @@ const validations = {
       updatedSuccess: "¡El trabajador ha sido actualizado exitosamente!",
       deletedSuccess: "¡El trabajador ha sido eliminado exitosamente!",
     },
-
+    // Aquí irás añadiendo: campaigns, plots, etc.
   },
   createForm: {
     // Estándares de Títulos
@@ -26,7 +26,7 @@ const validations = {
       edit: "Guardar cambios",
       cancel: "Cancelar",
     },
-    // Errores específicos 
+    // Errores específicos (Basados en tu Backend Laravel)
     errors: {
       nameRequired: "El nombre es obligatorio",
       nameMaxLength: "El nombre no puede superar los 60 caracteres",
