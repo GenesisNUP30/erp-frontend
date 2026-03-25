@@ -14,7 +14,8 @@ export default function useWorkers() {
       const data = await getWorkersRequest();
 
       setWorkers(data);
-    } catch (error) {
+    } catch (error: any) {
+      
       console.error("Error cargando trabajadores:", error);
     } finally {
       setLoading(false);

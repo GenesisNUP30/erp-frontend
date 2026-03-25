@@ -21,11 +21,21 @@ interface Props {
   register: UseFormRegister<WorkerFormData>;
   errors: FieldErrors<WorkerFormData>;
   control: Control<WorkerFormData>;
+  serverErrors?: Record<string, string[]> | null;
 }
 
-export default function WorkerFields({ register, errors, control }: Props) {
+export default function WorkerFields({ register, errors, control, serverErrors }: Props) {
   // Acceso directo a los labels para limpiar el JSX
   const l = v.entities.workers.labels;
+
+  // Función auxiliar para obtener el mensaje de error 
+  const getError = (fieldName: keyof WorkerFormData) => {
+    // Error de Zod 
+    if (errors[fieldName]) return errors[fieldName]?.message;
+    // Error de Back
+    if (serverErrors && serverErrors[fieldName]) return serverErrors[fieldName][0];
+    return null;
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -36,41 +46,41 @@ export default function WorkerFields({ register, errors, control }: Props) {
 
         {/* Fila 1: Nombre y Usuario */}
         <Box display="flex" gap={2} flexWrap="wrap">
-          <FormControl error={!!errors.name} sx={{ flex: '1 1 300px' }}>
+          <FormControl error={!!getError('name')} sx={{ flex: '1 1 300px' }}>
             <InputLabel htmlFor="name">{l.name}</InputLabel>
             <OutlinedInput id="name" label={l.name} {...register('name')} />
-            <FormHelperText>{errors.name?.message}</FormHelperText>
+            <FormHelperText>{getError('name')}</FormHelperText>
           </FormControl>
 
-          <FormControl error={!!errors.username} sx={{ flex: '1 1 200px' }}>
+          <FormControl error={!!getError('username')} sx={{ flex: '1 1 200px' }}>
             <InputLabel htmlFor="username">{l.username}</InputLabel>
             <OutlinedInput id="username" label={l.username} {...register('username')} />
-            <FormHelperText>{errors.username?.message}</FormHelperText>
+            <FormHelperText>{getError('username')}</FormHelperText>
           </FormControl>
         </Box>
 
         {/* Fila 2: DNI y Rol */}
         <Box display="flex" gap={2} flexWrap="wrap">
-          <FormControl error={!!errors.dni} sx={{ flex: "1 1 200px" }}>
+          <FormControl error={!!getError('dni')} sx={{ flex: "1 1 200px" }}>
             <InputLabel htmlFor="dni">{l.dni}</InputLabel>
             <OutlinedInput id="dni" label={l.dni} {...register('dni')} />
-            <FormHelperText>{errors.dni?.message}</FormHelperText>
+            <FormHelperText>{getError('dni')}</FormHelperText>
           </FormControl>
 
-          <FormControl error={!!errors.rol} sx={{ flex: '1 1 200px' }}>
+          <FormControl error={!!getError('rol')} sx={{ flex: '1 1 200px' }}>
             <InputLabel id='rol-label'>{l.rol}</InputLabel>
             <Select labelId="rol-label" id="rol" defaultValue='' label={l.rol} {...register('rol')}>
               <MenuItem value="recolector">Recolector</MenuItem>
               <MenuItem value="encargado">Encargado</MenuItem>
               <MenuItem value="administrador">Administrador</MenuItem>
             </Select>
-            <FormHelperText>{errors.rol?.message}</FormHelperText>
+            <FormHelperText>{getError('rol')}</FormHelperText>
           </FormControl>
         </Box>
 
         {/* Fila 3: Email y Teléfono */}
         <Box display="flex" gap={2} flexWrap="wrap">
-          <FormControl error={!!errors.email} sx={{ flex: "1 1 300px" }}>
+          <FormControl error={!!getError('email')} sx={{ flex: "1 1 300px" }}>
             <InputLabel htmlFor="email">{l.email}</InputLabel>
             <OutlinedInput
               id="email"
@@ -78,23 +88,23 @@ export default function WorkerFields({ register, errors, control }: Props) {
               label={l.email}
               {...register("email")}
             />
-            <FormHelperText>{errors.email?.message}</FormHelperText>
+            <FormHelperText>{getError('email')}</FormHelperText>
           </FormControl>
 
-          <FormControl error={!!errors.telefono} sx={{ flex: "1 1 200px" }}>
+          <FormControl error={!!getError('telefono')} sx={{ flex: "1 1 200px" }}>
             <InputLabel htmlFor="telefono">{l.telefono}</InputLabel>
             <OutlinedInput
               id="telefono"
               label={l.telefono}
               {...register("telefono")}
             />
-            <FormHelperText>{errors.telefono?.message}</FormHelperText>
+            <FormHelperText>{getError('telefono')}</FormHelperText>
           </FormControl>
         </Box>
 
         {/* Fila 4: Fecha Alta y Password (si fuera necesario) */}
         <Box display="flex" gap={2} flexWrap="wrap">
-          <FormControl error={!!errors.fecha_alta} sx={{ flex: "1 1 200px" }}>
+          <FormControl error={!!getError('fecha_alta')} sx={{ flex: "1 1 200px" }}>
             <Controller
               name="fecha_alta"
               control={control}
@@ -107,19 +117,19 @@ export default function WorkerFields({ register, errors, control }: Props) {
                   }}
                   slotProps={{
                     textField: {
-                      error: !!errors.fecha_alta,
+                      error: !!getError('fecha_alta'),
                     },
                   }}
                 />
               )}
             />
-            <FormHelperText>{errors.fecha_alta?.message}</FormHelperText>
+            <FormHelperText>{getError('fecha_alta')}</FormHelperText>
           </FormControl>
 
-          <FormControl error={!!errors.password} sx={{ flex: '1 1 200px' }}>
+          <FormControl error={!!getError('password')} sx={{ flex: '1 1 200px' }}>
             <InputLabel htmlFor="password">{l.password}</InputLabel>
             <OutlinedInput id="password" type="password" label={l.password} {...register('password')} />
-            <FormHelperText>{errors.password?.message}</FormHelperText>
+            <FormHelperText>{getError('password')}</FormHelperText>
           </FormControl>
         </Box>
       </Box>
