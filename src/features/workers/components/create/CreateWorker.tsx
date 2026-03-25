@@ -74,7 +74,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
     >
       {/* Cabecera del Modal */}
       <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h6">
+        <Typography>
           {v.createForm.title.replace('{item}', v.entities.workers.singular)}
         </Typography>
         <IconButton
