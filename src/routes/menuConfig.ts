@@ -13,12 +13,12 @@ export const MENU_ITEMS: MenuItem[] = [
     title: 'Dashboard',
     path: ROUTES.DASHBOARD,
     icon: 'Dashboard',
-    roles: ['admin', 'encargado', 'recolector'],
+    roles: ['administrador', 'encargado', 'recolector'],
   },
   {
     title: 'Trabajadores',
     path: '/trabajadores',
     icon: 'People',
-    roles: ['admin', 'encargado'],
+    roles: ['administrador', 'encargado'],
   },
 ];
