@@ -7,7 +7,10 @@ export const workerSchema = z.object({
   .min(1, v.createForm.errors.nameRequired)
   .max(60, v.createForm.errors.nameMaxLength),
   username: z.string().min(1, v.generic.required),
-  email: z.string().email(v.createForm.errors.emailInvalid),
+  email: z.string()
+  .email(v.createForm.errors.emailInvalid)
+  .optional()
+  .or(z.literal('')),
   dni: z
   .string()
   .regex(/^[0-9]{8}[A-Z]$/, v.createForm.errors.dniInvalid),
