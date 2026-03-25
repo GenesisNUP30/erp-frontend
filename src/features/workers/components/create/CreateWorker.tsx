@@ -25,7 +25,7 @@ interface Props {
 
 export default function CreateWorker({ open, onClose, onSuccess }: Props) {
   // Inicializamos el hook de creación
-  const { createWorker, loading } = useCreateWorker(() => {
+  const { createWorker, loading, serverErrors } = useCreateWorker(() => {
     reset(); // Limpiamos el formulario al tener éxito
     onSuccess(); // Refrescamos la lista y cerramos el modal
   });
@@ -93,6 +93,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
             register={register} 
             errors={errors} 
             control={control} 
+            serverErrors={serverErrors}
           />
         </Box>
       </DialogContent>
