@@ -1,15 +1,15 @@
 import apiClient from "../../../api/apiClient";
-import type { Worker } from "../types/IWorkers";
+import type { Worker, CreateWorkerDTO } from "../types/IWorkers";
 
 /**
  * Tipado estándar de respuesta de Laravel
  */
-type ApiResponse<T> = {
+interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
   count?: number;
-};
+}
 
 /**
  * GET - Listado de trabajadores
@@ -34,9 +34,8 @@ export const getWorkersRequest = async (): Promise<Worker[]> => {
  * POST - Crear trabajador
  */
 export const createWorkerRequest = async (
-  data: Partial<Worker>,
+  data: CreateWorkerDTO,
 ): Promise<ApiResponse<Worker>> => {
-  try {
     const response = await apiClient.post<ApiResponse<Worker>>(
       "/trabajadores",
       data,
@@ -47,10 +46,7 @@ export const createWorkerRequest = async (
     }
 
     throw new Error(response.data.message || "Error creando trabajador");
-  } catch (error) {
-    console.error("createWorkerRequest error:", error);
-    throw error;
-  }
+
 };
 
 /**

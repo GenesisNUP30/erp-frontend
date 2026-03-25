@@ -1,46 +1,24 @@
 import { useState } from 'react';
 import { createWorkerRequest } from '../services/workersService';
-import type { Role } from '../../../constants/roles';
-// import { useNotificationStore } from '@/stores/notificationStore';
-
-type CreateWorkerDTO = {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  dni: string;
-  telefono: string;
-  rol: Role;
-  fecha_alta: string;
-};
+import type { WorkerFormData } from '../schema/workerSchema';
+import { mapWorkerFormToCreateDTO } from '../mappers/worker.mappers';
 
 export default function useCreateWorker(onSuccess: () => void) {
   const [loading, setLoading] = useState(false);
-  // const { postNotification } = useNotificationStore();
 
-  const createWorker = async (data: CreateWorkerDTO) => {
+  const createWorker = async (formData: WorkerFormData) => {
     try {
       setLoading(true);
 
-      const response = await createWorkerRequest(data);
+      const payload = mapWorkerFormToCreateDTO(formData);
 
-      // ✅ SUCCESS (como en useCrews)
-      // postNotification(
-      //   response.message || 'El trabajador ha sido creado correctamente',
-      //   'success',
-      // );
+      const response = await createWorkerRequest(payload);
 
       onSuccess();
 
       return response;
     } catch (error) {
       console.error('Error creando trabajador:', error);
-
-      // ❌ ERROR
-      // postNotification(
-      //   error instanceof Error ? error.message : 'Error desconocido',
-      //   'error',
-      // );
 
       throw error;
     } finally {
