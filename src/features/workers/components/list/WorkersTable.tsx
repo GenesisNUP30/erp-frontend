@@ -5,6 +5,7 @@ import {
   TableCell,
   TableBody,
   Chip,
+  IconButton,
 } from "@mui/material";
 import type { Worker } from "../../types/IWorkers";
 
@@ -26,6 +27,7 @@ export default function WorkersTable({ workers }: Props) {
           <TableCell>Rol</TableCell>
           <TableCell>Fecha Alta</TableCell>
           <TableCell>Estado</TableCell>
+          <TableCell align="right">Acciones</TableCell>
         </TableRow>
       </TableHead>
 
@@ -41,6 +43,11 @@ export default function WorkersTable({ workers }: Props) {
                 label={worker.fecha_baja ? "Inactivo" : "Activo"}
                 color={worker.fecha_baja ? "default" : "success"}
               />
+            </TableCell>
+            <TableCell align="right">
+              <IconButton>
+                {/* <MoreVertIcon /> */}
+              </IconButton>
             </TableCell>
           </TableRow>
         ))}
