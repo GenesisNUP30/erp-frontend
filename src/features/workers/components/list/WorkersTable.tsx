@@ -9,7 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 
 import type { Worker } from "../../types/IWorkers";
-import GenericTable from "../../../../components/shared/GenericTable";
+import GenericTable from "../../../../components/shared/tables/GenericTable";
 import ActionsMenu from "../../../../components/shared/ActionsMenu";
 
 interface WorkerTableProps {
