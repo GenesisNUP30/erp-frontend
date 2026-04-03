@@ -25,6 +25,14 @@ const validations = {
     },
     // Aquí irás añadiendo: campaigns, plots, etc.
   },
+  tableList: {
+    headers: {
+      fullName: "Nombre completo",
+      username: "Usuario",
+      role: "Rol",
+      status: "Estado",
+    }
+  },
   createForm: {
     // Estándares de Títulos
     title: "Crear nuevo {item}",
