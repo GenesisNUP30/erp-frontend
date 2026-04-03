@@ -30,6 +30,7 @@ export const useAuthStore = create<AuthState>()(
       setAuth: (user, token, remember) => {
         set({ user, token });
         if (remember) {
+          //TODO: Arreglar remember, no funciona - USAR ZUSTAND
           localStorage.setItem(STORAGE_KEYS.TOKEN, token);
           localStorage.setItem(STORAGE_KEYS.REMEMBER, "true");
         } else {
