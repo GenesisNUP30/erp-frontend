@@ -21,10 +21,8 @@ export default function WorkersTable({ workers }: Props) {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Nombre</TableCell>
+          <TableCell>Nombre completo</TableCell>
           <TableCell>Usuario</TableCell>
-          <TableCell>DNI</TableCell>
-          <TableCell>Teléfono</TableCell>
           <TableCell>Rol</TableCell>
           <TableCell>Fecha Alta</TableCell>
           <TableCell>Estado</TableCell>
@@ -36,8 +34,6 @@ export default function WorkersTable({ workers }: Props) {
           <TableRow key={worker.id}>
             <TableCell>{worker.name}</TableCell>
             <TableCell>{worker.username}</TableCell>
-            <TableCell>{worker.dni}</TableCell>
-            <TableCell>{worker.telefono}</TableCell>
             <TableCell>{worker.rol}</TableCell>
             <TableCell>{worker.fecha_alta}</TableCell>
             <TableCell>
