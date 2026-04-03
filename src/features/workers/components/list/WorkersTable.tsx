@@ -2,6 +2,8 @@ import { TableCell, Chip } from '@mui/material';
 import GenericTable from '../../../../components/shared/tables/GenericTable';
 import type { HeaderOption } from '../../../../components/shared/tables/types';
 import type { Worker } from '../../types/IWorkers';
+import validations from '../../../../validations/validations';
+
 
 interface Props {
   workers: Worker[];
@@ -11,13 +13,13 @@ interface Props {
 }
 
 export default function WorkersTable({ workers, loading, onViewDetails, onEditWorker }: Props) {
-  
+  const l = validations.tableList.headers; // Acceso directo a los labels de la tabla
   // Definimos las columnas
   const headers: HeaderOption[] = [
-    { id: 'name', label: 'Nombre completo' },
-    { id: 'username', label: 'Usuario' },
-    { id: 'rol', label: 'Rol' },
-    { id: 'status', label: 'Estado' },
+    { id: 'name', label: l.fullName },
+    { id: 'username', label: l.username },
+    { id: 'rol', label: l.role },
+    { id: 'status', label: l.status },
   ];
 
   return (
