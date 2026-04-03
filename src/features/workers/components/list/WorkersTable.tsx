@@ -7,6 +7,7 @@ import {
   Chip,
   IconButton,
 } from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import type { Worker } from "../../types/IWorkers";
 
 interface Props {
@@ -45,8 +46,10 @@ export default function WorkersTable({ workers }: Props) {
               />
             </TableCell>
             <TableCell align="right">
-              <IconButton>
-                {/* <MoreVertIcon /> */}
+              <IconButton onClick={(e) => {
+                e.stopPropagation
+              }}>
+                <MoreVertIcon />
               </IconButton>
             </TableCell>
           </TableRow>
