@@ -21,6 +21,7 @@ export default function AppRouter() {
         <Route element={<MainLayout />}>
           <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
           <Route path={ROUTES.WORKERS} element={<WorkersPage />} />
+          <Route path={ROUTES.WORKER_DETAILS} element={<WorkerDetailsPage />} />
         </Route>
       </Route>
     </Routes>
