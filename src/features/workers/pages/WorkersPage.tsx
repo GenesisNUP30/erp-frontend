@@ -37,7 +37,7 @@ export default function WorkersPage() {
           <CircularProgress />
         </Box>
       ) : (
-        <WorkersTable workers={workers} />
+        <WorkersTable workers={workers} loading={loading} onViewDetails={handleOpenModal} onEditWorker={handleOpenModal} />
       )}
 
       {/* MODAL DE CREACIÓN */}
