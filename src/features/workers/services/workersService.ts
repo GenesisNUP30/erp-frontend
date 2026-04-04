@@ -31,22 +31,37 @@ export const getWorkersRequest = async (): Promise<Worker[]> => {
 };
 
 /**
+ * GET - Obtener un trabajador por ID
+ */
+export const getWorkerByIdRequest = async (
+  id: string | number,
+): Promise<Worker> => {
+  const response = await apiClient.get<ApiResponse<Worker>>(
+    `/trabajadores/${id}`,
+  );
+
+  if (response.data.success) {
+    return response.data.data;
+  }
+  throw new Error("No se pudo cargar el trabajador");
+};
+
+/**
  * POST - Crear trabajador
  */
 export const createWorkerRequest = async (
   data: CreateWorkerDTO,
 ): Promise<ApiResponse<Worker>> => {
-    const response = await apiClient.post<ApiResponse<Worker>>(
-      "/trabajadores",
-      data,
-    );
+  const response = await apiClient.post<ApiResponse<Worker>>(
+    "/trabajadores",
+    data,
+  );
 
-    if (response.data.success) {
-      return response.data;
-    }
+  if (response.data.success) {
+    return response.data;
+  }
 
-    throw new Error(response.data.message || "Error creando trabajador");
-
+  throw new Error(response.data.message || "Error creando trabajador");
 };
 
 /**
