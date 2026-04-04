@@ -3,5 +3,5 @@ export const ROUTES = {
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
   WORKERS: '/trabajadores',
-  WORKER_DETAILS: '/trabajadores/:id', // Ruta para el detalle
+  WORKER_DETAILS: '/trabajadores/detalles/:id', // Ruta para el detalle
 } as const;

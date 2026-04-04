@@ -5,6 +5,7 @@ import { ROUTES } from "./routes";
 import LoginPage from "../features/auth/pages/LoginPage";
 import MainLayout from "../components/layouts/MainLayout";
 import WorkersPage from "../features/workers/pages/WorkersPage";
+import WorkerDetailsPage from "../features/workers/pages/WorkerDetailsPage";
 
 
 export default function AppRouter() {
