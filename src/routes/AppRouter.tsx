@@ -5,6 +5,7 @@ import { ROUTES } from "./routes";
 import LoginPage from "../features/auth/pages/LoginPage";
 import MainLayout from "../components/layouts/MainLayout";
 import WorkersPage from "../features/workers/pages/WorkersPage";
+import WorkerDetailsPage from "../features/workers/pages/WorkerDetailsPage";
 
 
 export default function AppRouter() {
@@ -21,6 +22,7 @@ export default function AppRouter() {
         <Route element={<MainLayout />}>
           <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
           <Route path={ROUTES.WORKERS} element={<WorkersPage />} />
+          <Route path={ROUTES.WORKER_DETAILS} element={<WorkerDetailsPage />} />
         </Route>
       </Route>
     </Routes>
