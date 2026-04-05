@@ -27,7 +27,12 @@ export default function WorkerDetailsPage() {
     <Box p={3}>
       <Stack spacing={3}>
         {/* Componente de cabecera con botón volver y título */}
-        <WorkerDetailHeader name={worker.name} />
+        <WorkerDetailHeader 
+        workerId={worker.id}
+        name={worker.name} 
+        isInactive={!!worker.fecha_baja}
+        
+        />
 
         {/* Componente con la información detallada */}
         <WorkerDetailInfo worker={worker} />

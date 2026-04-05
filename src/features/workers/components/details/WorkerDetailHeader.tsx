@@ -15,7 +15,7 @@ interface Props {
 export default function WorkerDetailHeader({ workerId, name, isInactive, onStatusChange }: Props) {
   const navigate = useNavigate();
 
-  // 1. Configuración de estados (Fuera del return)
+  // Configuración de estados 
   const statusOptions: StatusOption[] = [
     { label: 'Activo', value: 'active', color: 'success' },
     { label: 'Inactivo', value: 'inactive', color: 'default' },
