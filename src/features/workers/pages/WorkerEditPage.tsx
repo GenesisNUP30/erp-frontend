@@ -1,25 +1,39 @@
-import { Box, CircularProgress, Alert, Typography } from "@mui/material";
+import { Box, CircularProgress, Alert, Stack } from "@mui/material";
 import useEditWorker from "../hooks/useEditWorker";
 import WorkerEditForm from "../components/edit/WorkEditForm";
-
+import WorkerEditHeader from "../components/edit/WorkerEditHeader";
 
 export default function WorkerEditPage() {
   const { worker, loading, updating, error, updateWorker } = useEditWorker();
-
-  if (loading) return <Box p={5} textAlign="center"><CircularProgress /></Box>;
+  const handleStatusUpdate = async (newStatus: string) => {
+    // Lógica para llamar al service y actualizar la fecha_baja
+    // Si es 'inactive', mandamos la fecha de hoy. Si es 'active', mandamos null.
+    console.log("Cambiando estado a:", newStatus);
+    // refresh();
+  };
+  if (loading)
+    return (
+      <Box p={5} textAlign="center">
+        <CircularProgress />
+      </Box>
+    );
   if (error || !worker) return <Alert severity="error">{error}</Alert>;
 
   return (
     <Box p={3}>
-      <Typography variant="h4" mb={3}>Editar Trabajador: {worker.name}</Typography>
-      
-      <Box maxWidth="800px">
-        <WorkerEditForm 
-          initialData={worker} 
-          onSubmit={updateWorker} 
-          loading={updating} 
+      <Stack spacing={3}>
+        <WorkerEditHeader
+          name={worker.name}
+          isInactive={!!worker.fecha_baja}
+          onStatusChange={handleStatusUpdate}
         />
-      </Box>
+
+        <WorkerEditForm
+          initialData={worker}
+          onSubmit={updateWorker}
+          loading={updating}
+        />
+      </Stack>
     </Box>
   );
 }
