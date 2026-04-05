@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import { ROUTES } from '../../../../routes/routes';
 import StatusChip, { type StatusOption } from '../../../../components/shared/StatusChip';
+import v from '../../../../validations/validations';
 
 interface Props {
   workerId: number;
@@ -17,8 +18,8 @@ export default function WorkerDetailHeader({ workerId, name, isInactive, onStatu
 
   // Configuración de estados 
   const statusOptions: StatusOption[] = [
-    { label: 'Activo', value: 'active', color: 'success' },
-    { label: 'Inactivo', value: 'inactive', color: 'default' },
+    { label: v.entities.workers.status.active, value: 'active', color: 'success' },
+    { label: v.entities.workers.status.inactive, value: 'inactive', color: 'default' },
   ];
 
   const currentStatusValue = isInactive ? 'inactive' : 'active';
