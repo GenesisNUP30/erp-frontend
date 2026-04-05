@@ -25,8 +25,6 @@ interface Props {
 }
 
 export default function WorkerFields({ register, errors, control, serverErrors }: Props) {
-  // Acceso directo a los labels para limpiar el JSX
-  const l = v.entities.workers.labels;
 
   // Función auxiliar para obtener el mensaje de error 
   const getError = (fieldName: keyof WorkerFormData) => {
@@ -47,14 +45,14 @@ export default function WorkerFields({ register, errors, control, serverErrors }
         {/* Fila 1: Nombre y Usuario */}
         <Box display="flex" gap={2} flexWrap="wrap">
           <FormControl error={!!getError('name')} sx={{ flex: '1 1 300px' }}>
-            <InputLabel htmlFor="name">{l.name}</InputLabel>
-            <OutlinedInput id="name" label={l.name} {...register('name')} />
+            <InputLabel htmlFor="name">{v.entities.workers.labels.name}</InputLabel>
+            <OutlinedInput id="name" label={v.entities.workers.labels.name} {...register('name')} />
             <FormHelperText>{getError('name')}</FormHelperText>
           </FormControl>
 
           <FormControl error={!!getError('username')} sx={{ flex: '1 1 200px' }}>
-            <InputLabel htmlFor="username">{l.username}</InputLabel>
-            <OutlinedInput id="username" label={l.username} {...register('username')} />
+            <InputLabel htmlFor="username">{v.entities.workers.labels.username}</InputLabel>
+            <OutlinedInput id="username" label={v.entities.workers.labels.username} {...register('username')} />
             <FormHelperText>{getError('username')}</FormHelperText>
           </FormControl>
         </Box>
@@ -62,14 +60,14 @@ export default function WorkerFields({ register, errors, control, serverErrors }
         {/* Fila 2: DNI y Rol */}
         <Box display="flex" gap={2} flexWrap="wrap">
           <FormControl error={!!getError('dni')} sx={{ flex: "1 1 200px" }}>
-            <InputLabel htmlFor="dni">{l.dni}</InputLabel>
-            <OutlinedInput id="dni" label={l.dni} {...register('dni')} />
+            <InputLabel htmlFor="dni">{v.entities.workers.labels.dni}</InputLabel>
+            <OutlinedInput id="dni" label={v.entities.workers.labels.dni} {...register('dni')} />
             <FormHelperText>{getError('dni')}</FormHelperText>
           </FormControl>
 
           <FormControl error={!!getError('rol')} sx={{ flex: '1 1 200px' }}>
-            <InputLabel id='rol-label'>{l.rol}</InputLabel>
-            <Select labelId="rol-label" id="rol" defaultValue='' label={l.rol} {...register('rol')}>
+            <InputLabel id='rol-label'>{v.entities.workers.labels.rol}</InputLabel>
+            <Select labelId="rol-label" id="rol" defaultValue='' label={v.entities.workers.labels.rol} {...register('rol')}>
               <MenuItem value="recolector">Recolector</MenuItem>
               <MenuItem value="encargado">Encargado</MenuItem>
               <MenuItem value="administrador">Administrador</MenuItem>
@@ -81,21 +79,21 @@ export default function WorkerFields({ register, errors, control, serverErrors }
         {/* Fila 3: Email y Teléfono */}
         <Box display="flex" gap={2} flexWrap="wrap">
           <FormControl error={!!getError('email')} sx={{ flex: "1 1 300px" }}>
-            <InputLabel htmlFor="email">{l.email}</InputLabel>
+            <InputLabel htmlFor="email">{v.entities.workers.labels.email}</InputLabel>
             <OutlinedInput
               id="email"
               type="email"
-              label={l.email}
+              label={v.entities.workers.labels.email}
               {...register("email")}
             />
             <FormHelperText>{getError('email')}</FormHelperText>
           </FormControl>
 
           <FormControl error={!!getError('telefono')} sx={{ flex: "1 1 200px" }}>
-            <InputLabel htmlFor="telefono">{l.telefono}</InputLabel>
+            <InputLabel htmlFor="telefono">{v.entities.workers.labels.telefono}</InputLabel>
             <OutlinedInput
               id="telefono"
-              label={l.telefono}
+              label={v.entities.workers.labels.telefono}
               {...register("telefono")}
             />
             <FormHelperText>{getError('telefono')}</FormHelperText>
@@ -110,7 +108,7 @@ export default function WorkerFields({ register, errors, control, serverErrors }
               control={control}
               render={({ field }) => (
                 <DatePicker
-                  label={l.fecha_alta}
+                  label={v.entities.workers.labels.fecha_alta}
                   value={field.value ? dayjs(field.value) : null}
                   onChange={(date) => {
                     field.onChange(date ? date.format("YYYY-MM-DD") : "");
@@ -127,8 +125,8 @@ export default function WorkerFields({ register, errors, control, serverErrors }
           </FormControl>
 
           <FormControl error={!!getError('password')} sx={{ flex: '1 1 200px' }}>
-            <InputLabel htmlFor="password">{l.password}</InputLabel>
-            <OutlinedInput id="password" type="password" label={l.password} {...register('password')} />
+            <InputLabel htmlFor="password">{v.entities.workers.labels.password}</InputLabel>
+            <OutlinedInput id="password" type="password" label={v.entities.workers.labels.password} {...register('password')} />
             <FormHelperText>{getError('password')}</FormHelperText>
           </FormControl>
         </Box>

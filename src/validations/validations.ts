@@ -18,6 +18,10 @@ const validations = {
         fecha_alta: "Fecha de alta",
         password: "Contraseña",
       },
+      status: {
+        active: "Activo",
+        inactive: "Inactivo"
+      },
       // Mensajes de éxito estándar
       createdSuccess: "¡El trabajador ha sido creado exitosamente!",
       updatedSuccess: "¡El trabajador ha sido actualizado exitosamente!",
@@ -60,6 +64,13 @@ const validations = {
       dateMax: "La fecha de alta no puede ser posterior a hoy",
     },
   },
+  details: {
+    // Títulos
+    subtitle: "Información detallada",
+    fields: {
+      fecha_baja: "Fecha de baja",
+    }
+  }
 };
 
 export default validations;
