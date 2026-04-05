@@ -65,6 +65,24 @@ export const createWorkerRequest = async (
 };
 
 /**
+ * PUT - Actualizar un trabajador existente
+ */
+export const updateWorkerRequest = async (
+  id: number | string,
+  data: Partial<Worker>,
+): Promise<Worker> => {
+  const response = await apiClient.put<ApiResponse<Worker>>(
+    `/trabajadores/${id}`,
+    data,
+  );
+
+  if (response.data.success) {
+    return response.data.data;
+  }
+  throw new Error("Error al actualizar el trabajador");
+};
+
+/**
  * DELETE - Eliminar trabajador
  */
 export const deleteWorkerRequest = async (id: number) => {

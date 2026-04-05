@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import v from '../../../validations/validations';
+import type { Role } from '../../../constants/roles';
 
 export const workerSchema = z.object({
   name: z
@@ -9,6 +10,7 @@ export const workerSchema = z.object({
   username: z.string().min(1, v.generic.required),
   email: z.string()
   .email(v.createForm.errors.emailInvalid)
+  .nullable()
   .optional()
   .or(z.literal('')),
   dni: z
@@ -17,7 +19,7 @@ export const workerSchema = z.object({
   telefono: z
   .string()
   .regex(/^[67][0-9]{8}$/, v.createForm.errors.phoneInvalid),
-  rol: z.string().min(1, v.createForm.errors.roleRequired),
+  rol: z.string().min(1, v.createForm.errors.roleRequired) as z.ZodType<Role>,
   fecha_alta: z.string().min(1, v.createForm.errors.dateRequired),
   password: z
   .string()

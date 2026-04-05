@@ -6,6 +6,7 @@ import LoginPage from "../features/auth/pages/LoginPage";
 import MainLayout from "../components/layouts/MainLayout";
 import WorkersPage from "../features/workers/pages/WorkersPage";
 import WorkerDetailsPage from "../features/workers/pages/WorkerDetailsPage";
+import WorkerEditPage from "../features/workers/pages/WorkerEditPage";
 
 
 export default function AppRouter() {
@@ -23,6 +24,7 @@ export default function AppRouter() {
           <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
           <Route path={ROUTES.WORKERS} element={<WorkersPage />} />
           <Route path={ROUTES.WORKER_DETAILS} element={<WorkerDetailsPage />} />
+          <Route path={ROUTES.WORKER_EDIT} element={<WorkerEditPage />} />
         </Route>
       </Route>
     </Routes>
