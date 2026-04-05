@@ -66,7 +66,6 @@ const validations = {
   },
   details: {
     // Títulos
-    title: "Detalles de {item}",
     subtitle: "Información detallada",
     fields: {
       fecha_baja: "Fecha de baja",
