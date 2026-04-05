@@ -10,7 +10,7 @@ export default function WorkerDetailInfo({ worker }: Props) {
   const l = v.entities.workers.labels;
 
   // Renderizador de campos (Lógica fuera del return principal)
-  const renderDataField = (label: string, value: string | null) => (
+  const renderDataField = (label: string, value: string | null | undefined) => (
     <Box sx={{ flex: '1 1 300px', mb: 2 }}>
       <Typography variant="caption" color="text.secondary" display="block" sx={{ fontWeight: 'bold' }}>
         {label}
@@ -34,6 +34,7 @@ export default function WorkerDetailInfo({ worker }: Props) {
       {/* SECCIÓN 2: Datos Técnicos */}
       <Box display="flex" flexWrap="wrap" gap={2}>
         {renderDataField(l.dni, worker.dni)}
+        {renderDataField(l.email, worker.email)}
         {renderDataField(l.telefono, worker.telefono)}
         {renderDataField(l.rol, worker.rol)}
       </Box>

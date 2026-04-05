@@ -7,6 +7,7 @@ export interface Worker {
   id: number;
   name: string;
   username: string;
+  email?: string | null;
   dni: string;
   telefono: string;
   rol: Role;
