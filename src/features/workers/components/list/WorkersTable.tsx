@@ -18,13 +18,12 @@ export default function WorkersTable({
   onViewDetails,
   onEditWorker,
 }: Props) {
-  const l = v.tableList.headers; // Acceso directo a los labels de la tabla
   // Definimos las columnas
   const headers: HeaderOption[] = [
-    { id: "name", label: l.fullName },
-    { id: "username", label: l.username },
-    { id: "rol", label: l.role },
-    { id: "status", label: l.status },
+    { id: "name", label: v.tableList.headers.fullName },
+    { id: "username", label: v.tableList.headers.username },
+    { id: "rol", label: v.tableList.headers.role },
+    { id: "status", label: v.tableList.headers.status },
   ];
 
   return (
@@ -46,8 +45,8 @@ export default function WorkersTable({
             <StatusChip
               currentValue={worker.fecha_baja ? "inactive" : "active"}
               options={[
-                { label: "Activo", value: "active", color: "success" },
-                { label: "Inactivo", value: "inactive", color: "default" },
+                { label: v.entities.workers.status.active, value: "active", color: "success" },
+                { label: v.entities.workers.status.inactive, value: "inactive", color: "default" },
               ]}
               canChange={false} // En la tabla quizás prefieres que solo se cambie desde el menú de acciones
             />
