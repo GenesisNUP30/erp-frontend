@@ -9,6 +9,7 @@ export const workerSchema = z.object({
   username: z.string().min(1, v.generic.required),
   email: z.string()
   .email(v.createForm.errors.emailInvalid)
+  .nullable()
   .optional()
   .or(z.literal('')),
   dni: z
