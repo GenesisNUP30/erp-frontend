@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getWorkerByIdRequest, updateWorkerRequest } from "../services/workersService";
 import { ROUTES } from "../../../routes/routes";
-import type { Worker } from "../types/IWorkers";
+import type { UpdateWorkerDTO, Worker } from "../types/IWorkers";
+import type { WorkerFormData } from "../schema/workerSchema";
 
 export default function useEditWorker() {
   const { id } = useParams<{ id: string }>();
@@ -23,11 +24,11 @@ export default function useEditWorker() {
     }
   }, [id]);
 
-  const updateWorker = async (data: Partial<Worker>) => {
+  const updateWorker = async (data: WorkerFormData) => {
     if (!id) return;
     try {
       setUpdating(true);
-      await updateWorkerRequest(id, data);
+      await updateWorkerRequest(id, data as UpdateWorkerDTO);
       navigate(ROUTES.WORKER_DETAILS.replace(':id', id)); // Volvemos al detalle tras editar
     } catch (err: any) {
       throw err; // Lo lanzamos para que el formulario maneje los errores de validación

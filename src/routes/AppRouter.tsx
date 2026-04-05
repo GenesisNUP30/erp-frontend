@@ -6,6 +6,7 @@ import LoginPage from "../features/auth/pages/LoginPage";
 import MainLayout from "../components/layouts/MainLayout";
 import WorkersPage from "../features/workers/pages/WorkersPage";
 import WorkerDetailsPage from "../features/workers/pages/WorkerDetailsPage";
+import WorkerEditPage from "../features/workers/pages/WorkerEditPage";
 
 
 export default function AppRouter() {
