@@ -18,14 +18,13 @@ export default function WorkersPage() {
 
   // Lógica para ir al detalle 
   const handleViewDetails = (worker: Worker) => {
-    const path = ROUTES.WORKER_DETAILS.replace(':id', worker.id.toString());
-    navigate(path);
+    navigate(ROUTES.WORKER_DETAILS.replace(':id', worker.id.toString()));
   };
 
   // Lógica para ir a editar 
   const handleEditWorker = (worker: Worker) => {
     // Por ahora lo dejamos apuntando al detalle o donde prefieras
-    console.log("Editando trabajador:", worker.id);
+    navigate(ROUTES.WORKER_EDIT.replace(':id', worker.id.toString()));
   };
 
   const handleSuccess = () => {
