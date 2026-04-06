@@ -37,12 +37,15 @@ export default function useEditWorker() {
       setUpdating(true);
       setServerErrors(null);
       await updateWorkerRequest(id, data as UpdateWorkerDTO);
-      navigate(ROUTES.WORKER_DETAILS.replace(":id", id)); 
+      navigate(ROUTES.WORKER_DETAILS.replace(":id", id));
     } catch (err: any) {
       if (err.status === 422) {
-        setServerErrors(err.errors); 
+        setServerErrors(err.errors);
       }
+      setUpdating(false);
       throw err;
+    } finally {
+      setUpdating(false);
     }
   };
 
