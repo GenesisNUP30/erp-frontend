@@ -4,7 +4,7 @@ import ThemeProvider from "./providers/ThemeProvider";
 
 function App() {
   const baseName = import.meta.env.PROD
-    ? "/proyectos/2026/genesisnatalya/Proyecto_TFG/frontend"
+    ? "/proyectos/2026/genesisnatalya/Proyecto_TFG/erp_campoagricola"
     : "/";
 
   return (
