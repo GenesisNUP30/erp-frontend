@@ -11,7 +11,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { workerSchema } from '../../schema/workerSchema';
+import { createWorkerSchema } from '../../schema/workerSchema';
 import type { WorkerFormData } from '../../schema/workerSchema';
 import useCreateWorker from '../../hooks/useCreateWorker';
 import WorkerFields from './WorkerFields';
@@ -38,7 +38,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
     reset,
     formState: { errors },
   } = useForm<WorkerFormData>({
-    resolver: zodResolver(workerSchema) as any,
+    resolver: zodResolver(createWorkerSchema) as any,
     defaultValues: {
       name: '',
       username: '',

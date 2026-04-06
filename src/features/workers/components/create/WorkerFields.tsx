@@ -18,7 +18,7 @@ import v from "../../../../validations/validations";
 import dayjs from "dayjs";
 
 interface Props {
-  register: UseFormRegister<WorkerFormData>;
+  register: UseFormRegister<any>;
   errors: FieldErrors<WorkerFormData>;
   control: Control<WorkerFormData>;
   serverErrors?: Record<string, string[]> | null;

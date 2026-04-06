@@ -59,6 +59,7 @@ const validations = {
       phoneRequired: "El teléfono es obligatorio",
       phoneInvalid: "El teléfono debe empezar por 6 o 7 y tener 9 dígitos",
       emailInvalid: "El correo electrónico no es válido",
+      passwordRequired: "La contraseña es obligatoria",
       passwordMin: "La contraseña debe tener al menos 8 caracteres",
       roleRequired: "Debes seleccionar un rol",
       dateRequired: "La fecha de alta es obligatoria",

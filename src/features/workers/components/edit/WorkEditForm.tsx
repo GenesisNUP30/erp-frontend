@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import WorkerFields from "../create/WorkerFields"; // Reutilizamos tus inputs
 import type { Worker } from "../../types/IWorkers";
-import { workerSchema } from "../../schema/workerSchema";
+import { updateWorkerSchema } from "../../schema/workerSchema";
 import { z } from "zod";
 
-type WorkerFormData = z.infer<typeof workerSchema>;
+type WorkerFormData = z.infer<typeof updateWorkerSchema>;
 
 interface Props {
   initialData: Worker;
@@ -17,7 +17,7 @@ interface Props {
 
 export default function WorkerEditForm({ initialData, onSubmit, loading }: Props) {
   const { control, handleSubmit, register, formState: { errors } } = useForm<WorkerFormData>({
-    resolver: zodResolver(workerSchema) as any,
+    resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
       name: initialData.name,
       username: initialData.username,
