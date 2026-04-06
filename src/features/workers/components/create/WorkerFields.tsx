@@ -19,7 +19,7 @@ import dayjs from "dayjs";
 
 interface Props {
   register: UseFormRegister<any>;
-  errors: FieldErrors<WorkerFormData>;
+  errors: FieldErrors<any>;
   control: Control<WorkerFormData>;
   serverErrors?: Record<string, string[]> | null;
 }
@@ -31,15 +31,21 @@ export default function WorkerFields({
   serverErrors,
 }: Props) {
   // Función auxiliar para obtener el mensaje de error
-  const getError = (fieldName: keyof WorkerFormData) => {
-    // Error de Zod
-    if (errors[fieldName]) return errors[fieldName]?.message;
-    // Error de Back
-    if (serverErrors && serverErrors[fieldName])
+  const getError = (fieldName: string) => {
+    // Cambia el tipo a string para ser más flexible
+    // Prioridad: Error de Zod (Frontend)
+    if (errors[fieldName as keyof FieldErrors<WorkerFormData>]) {
+      return errors[fieldName as keyof FieldErrors<WorkerFormData>]
+        ?.message as string;
+    }
+
+    // Segunda opción: Error de Laravel (Backend)
+    if (serverErrors && serverErrors[fieldName]) {
       return serverErrors[fieldName][0];
+    }
+
     return null;
   };
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box display="flex" flexDirection="column" gap={3} mt={2}>
@@ -100,7 +106,7 @@ export default function WorkerFields({
               control={control}
               render={({ field }) => (
                 <Select
-                  {...field} 
+                  {...field}
                   labelId="rol-label"
                   id="rol"
                   label={v.entities.workers.labels.rol}
