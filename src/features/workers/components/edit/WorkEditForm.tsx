@@ -12,6 +12,7 @@ interface Props {
   initialData: Worker;
   onSubmit: (data: WorkerFormData) => void;
   loading: boolean;
+  serverErrors?: Record<string, string[]> | null;
 }
 
 export default function WorkerEditForm({ initialData, onSubmit, loading }: Props) {
