@@ -10,7 +10,7 @@ type WorkerFormData = z.infer<typeof updateWorkerSchema>;
 
 interface Props {
   initialData: Worker;
-  onSubmit: (data: WorkerFormData) => void;
+  onSubmit: (data: any) => void;
   loading: boolean;
   serverErrors?: Record<string, string[]> | null;
 }
