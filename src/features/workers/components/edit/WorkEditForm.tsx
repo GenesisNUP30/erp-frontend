@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import WorkerFields from "../create/WorkerFields"; // Reutilizamos tus inputs
 import type { Worker } from "../../types/IWorkers";
 import { updateWorkerSchema } from "../../schema/workerSchema";
+import { useAuthStore } from "../../../auth/store/authStore";
 import { z } from "zod";
 
 type WorkerFormData = z.infer<typeof updateWorkerSchema>;
@@ -16,6 +17,13 @@ interface Props {
 }
 
 export default function WorkerEditForm({ initialData, onSubmit, loading, serverErrors }: Props) {
+
+  // 1. Obtenemos el usuario logueado desde Zustand
+  const currentUser = useAuthStore((state) => state.user);
+
+  // 2. Lógica de permisos: Solo el administrador puede editar el rol
+  const canEditRol = currentUser?.rol === "administrador";
+
   const { control, handleSubmit, register, formState: { errors } } = useForm<WorkerFormData>({
     resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
@@ -34,7 +42,7 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
     <Paper sx={{ p: 3, borderRadius: '12px' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         {/* Usamos tus campos ya definidos */}
-        <WorkerFields control={control as any} errors={errors} register={register} serverErrors={serverErrors}/>
+        <WorkerFields control={control as any} errors={errors} register={register} serverErrors={serverErrors} canEditRol={canEditRol}/>
         
         <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
           <Button variant="contained" type="submit" disabled={loading}>

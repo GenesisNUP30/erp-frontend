@@ -22,6 +22,7 @@ interface Props {
   errors: FieldErrors<any>;
   control: Control<WorkerFormData>;
   serverErrors?: Record<string, string[]> | null;
+  canEditRol?: boolean;
 }
 
 export default function WorkerFields({
@@ -29,6 +30,7 @@ export default function WorkerFields({
   errors,
   control,
   serverErrors,
+  canEditRol = true,
 }: Props) {
   // Función auxiliar para obtener el mensaje de error
   const getError = (fieldName: string) => {
@@ -110,6 +112,7 @@ export default function WorkerFields({
                   labelId="rol-label"
                   id="rol"
                   label={v.entities.workers.labels.rol}
+                  disabled={!canEditRol}
                 >
                   <MenuItem value="recolector">Recolector</MenuItem>
                   <MenuItem value="encargado">Encargado</MenuItem>
@@ -118,6 +121,11 @@ export default function WorkerFields({
               )}
             />
             <FormHelperText>{getError("rol")}</FormHelperText>
+            {!canEditRol && (
+              <FormHelperText>
+                Solo los administradores pueden cambiar el rol.
+              </FormHelperText>
+            )}
           </FormControl>
         </Box>
 
