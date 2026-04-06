@@ -8,7 +8,6 @@ import WorkersPage from "../features/workers/pages/WorkersPage";
 import WorkerDetailsPage from "../features/workers/pages/WorkerDetailsPage";
 import WorkerEditPage from "../features/workers/pages/WorkerEditPage";
 
-
 export default function AppRouter() {
   return (
     <Routes>

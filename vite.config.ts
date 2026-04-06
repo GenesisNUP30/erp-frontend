@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     base: mode === 'production' 
-      ? '/proyectos/2026/genesisnatalya/Proyecto_TFG/frontend/' 
+      ? '/proyectos/2026/genesisnatalya/Proyecto_TFG/erp_campoagricola' 
       : '/',
   }
 })
