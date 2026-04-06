@@ -18,13 +18,13 @@ interface Props {
 
 export default function WorkerEditForm({ initialData, onSubmit, loading, serverErrors }: Props) {
 
-  // 1. Obtenemos el usuario logueado desde Zustand
+  // Obtener el usuario logueado desde Zustand
   const currentUser = useAuthStore((state) => state.user);
 
-  // 2. Lógica de permisos: Solo el administrador puede editar el rol
+  // Solo el administrador puede editar el rol
   const canEditRol = currentUser?.rol === "administrador";
 
-  const { control, handleSubmit, register, formState: { errors } } = useForm<WorkerFormData>({
+  const { control, handleSubmit, register, formState: { errors, isDirty } } = useForm<WorkerFormData>({
     resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
       name: initialData.name,
@@ -41,11 +41,11 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
   return (
     <Paper sx={{ p: 3, borderRadius: '12px' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        {/* Usamos tus campos ya definidos */}
+        {/* Usar campos ya definidos */}
         <WorkerFields control={control as any} errors={errors} register={register} serverErrors={serverErrors} canEditRol={canEditRol}/>
         
         <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
-          <Button variant="contained" type="submit" disabled={loading}>
+          <Button variant="contained" type="submit" disabled={loading || !isDirty}>
             {loading ? 'Guardando...' : 'Guardar Cambios'}
           </Button>
         </Box>
