@@ -50,9 +50,10 @@ const validations = {
     },
     // Errores específicos (Basados en tu Backend Laravel)
     errors: {
-      nameRequired: "El nombre es obligatorio",
-      nameMaxLength: "El nombre no puede superar los 60 caracteres",
+      nameRequired: 'El nombre es obligatorio',
+      nameMaxLength: 'El nombre no puede superar los 60 caracteres',
       nameInvalid: "El nombre contiene caracteres no válidos",
+      usernameEmailRequired: 'Debes introducir el nombre de usuario o el email',
       dniRequired: "El DNI es obligatorio",
       dniInvalid: "Formato de DNI no válido (ej: 12345678Z)",
       phoneRequired: "El teléfono es obligatorio",
