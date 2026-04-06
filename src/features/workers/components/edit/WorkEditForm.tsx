@@ -15,7 +15,7 @@ interface Props {
   serverErrors?: Record<string, string[]> | null;
 }
 
-export default function WorkerEditForm({ initialData, onSubmit, loading }: Props) {
+export default function WorkerEditForm({ initialData, onSubmit, loading, serverErrors }: Props) {
   const { control, handleSubmit, register, formState: { errors } } = useForm<WorkerFormData>({
     resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
@@ -34,7 +34,7 @@ export default function WorkerEditForm({ initialData, onSubmit, loading }: Props
     <Paper sx={{ p: 3, borderRadius: '12px' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         {/* Usamos tus campos ya definidos */}
-        <WorkerFields control={control as any} errors={errors} register={register}/>
+        <WorkerFields control={control as any} errors={errors} register={register} serverErrors={serverErrors}/>
         
         <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
           <Button variant="contained" type="submit" disabled={loading}>
