@@ -38,7 +38,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
     reset,
     formState: { errors },
   } = useForm<WorkerFormData>({
-    resolver: zodResolver(workerSchema),
+    resolver: zodResolver(workerSchema) as any,
     defaultValues: {
       name: '',
       username: '',
@@ -46,17 +46,16 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
       email: '',
       dni: '',
       telefono: '',
-      rol: '',
+      rol: '' as any,
       fecha_alta: new Date().toISOString().split('T')[0], // Fecha de hoy por defecto
       password: '',
-    },
+    } as WorkerFormData,
   });
 
   const onSubmit = async (data: WorkerFormData) => {
     try {
       await createWorker(data);
     } catch (error) {
-      // El error ya se maneja en el hook, pero podrías añadir un toast aquí
       console.error("Error en el componente CreateWorker:", error);
     }
   };
@@ -93,7 +92,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
           <WorkerFields 
             register={register} 
             errors={errors} 
-            control={control} 
+            control={control as any} 
             serverErrors={serverErrors}
           />
         </Box>
@@ -109,7 +108,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
           {v.createForm.buttons.cancel}
         </Button>
         <Button
-          onClick={handleSubmit(onSubmit)}
+          onClick={handleSubmit(onSubmit as any)}
           variant="contained"
           color="primary"
           disabled={loading}
