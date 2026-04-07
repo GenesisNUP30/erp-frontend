@@ -4,7 +4,7 @@ import WorkerEditForm from "../components/edit/WorkEditForm";
 import WorkerEditHeader from "../components/edit/WorkerEditHeader";
 
 export default function WorkerEditPage() {
-  const { worker, loading, updating, error, updateWorker } = useEditWorker();
+  const { worker, loading, updating, error, serverErrors, updateWorker } = useEditWorker();
   const handleStatusUpdate = async (newStatus: string) => {
     // Lógica para llamar al service y actualizar la fecha_baja
     // Si es 'inactive', mandamos la fecha de hoy. Si es 'active', mandamos null.
@@ -32,6 +32,7 @@ export default function WorkerEditPage() {
           initialData={worker}
           onSubmit={updateWorker}
           loading={updating}
+          serverErrors={serverErrors}
         />
       </Stack>
     </Box>

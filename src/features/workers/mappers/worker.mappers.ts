@@ -9,7 +9,7 @@ export const mapWorkerFormToCreateDTO = (
   data: WorkerFormData,
 ): CreateWorkerDTO => ({
   name: data.name,
-  username: data.username,
+  username: data.username ?? '',
   email: data.email || '',
   password: data.password || '',
   dni: data.dni,

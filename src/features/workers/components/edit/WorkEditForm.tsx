@@ -3,20 +3,29 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import WorkerFields from "../create/WorkerFields"; // Reutilizamos tus inputs
 import type { Worker } from "../../types/IWorkers";
-import { workerSchema } from "../../schema/workerSchema";
+import { updateWorkerSchema } from "../../schema/workerSchema";
+import { useAuthStore } from "../../../auth/store/authStore";
 import { z } from "zod";
 
-type WorkerFormData = z.infer<typeof workerSchema>;
+type WorkerFormData = z.infer<typeof updateWorkerSchema>;
 
 interface Props {
   initialData: Worker;
-  onSubmit: (data: WorkerFormData) => void;
+  onSubmit: (data: any) => void;
   loading: boolean;
+  serverErrors?: Record<string, string[]> | null;
 }
 
-export default function WorkerEditForm({ initialData, onSubmit, loading }: Props) {
-  const { control, handleSubmit, register, formState: { errors } } = useForm<WorkerFormData>({
-    resolver: zodResolver(workerSchema) as any,
+export default function WorkerEditForm({ initialData, onSubmit, loading, serverErrors }: Props) {
+
+  // Obtener el usuario logueado desde Zustand
+  const currentUser = useAuthStore((state) => state.user);
+
+  // Solo el administrador puede editar el rol
+  const canEditRol = currentUser?.rol === "administrador";
+
+  const { control, handleSubmit, register, formState: { errors, isDirty } } = useForm<WorkerFormData>({
+    resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
       name: initialData.name,
       username: initialData.username,
@@ -32,11 +41,11 @@ export default function WorkerEditForm({ initialData, onSubmit, loading }: Props
   return (
     <Paper sx={{ p: 3, borderRadius: '12px' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        {/* Usamos tus campos ya definidos */}
-        <WorkerFields control={control as any} errors={errors} register={register}/>
+        {/* Usar campos ya definidos */}
+        <WorkerFields control={control as any} errors={errors} register={register} serverErrors={serverErrors} canEditRol={canEditRol}/>
         
         <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
-          <Button variant="contained" type="submit" disabled={loading}>
+          <Button variant="contained" type="submit" disabled={loading || !isDirty}>
             {loading ? 'Guardando...' : 'Guardar Cambios'}
           </Button>
         </Box>
