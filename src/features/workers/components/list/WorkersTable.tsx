@@ -3,7 +3,9 @@ import GenericTable from "../../../../components/shared/tables/GenericTable";
 import type { HeaderOption } from "../../../../components/shared/tables/types";
 import type { Worker } from "../../types/IWorkers";
 import v from "../../../../validations/validations";
-import StatusChip from "../../../../components/shared/StatusChip";
+import StatusChip, { type StatusOption } from "../../../../components/shared/StatusChip";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 interface Props {
   workers: Worker[];
@@ -26,6 +28,21 @@ export default function WorkersTable({
     { id: "status", label: v.tableList.headers.status },
   ];
 
+  const workerStatusOptions: StatusOption[] = [
+    {
+      label: "Activo",
+      value: "activo",
+      color: "success",
+      icon: <CheckCircleIcon sx={{ fontSize: "16px" }} />,
+    },
+    {
+      label: "Inactivo",
+      value: "inactivo",
+      color: "error",
+      icon: <RemoveCircleIcon sx={{ fontSize: "16px" }} />,
+    },
+  ];
+
   return (
     <GenericTable
       loading={loading}
@@ -44,10 +61,7 @@ export default function WorkersTable({
           <TableCell>
             <StatusChip
               currentValue={worker.estado}
-              options={[
-                { label: v.entities.workers.status.active, value: "activo", color: "success" },
-                { label: v.entities.workers.status.inactive, value: "inactivo", color: "default" },
-              ]}
+              options={workerStatusOptions}
               canChange={false} // En la tabla quizás prefieres que solo se cambie desde el menú de acciones
             />
           </TableCell>
