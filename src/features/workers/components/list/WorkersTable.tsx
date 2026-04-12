@@ -43,10 +43,10 @@ export default function WorkersTable({
           </TableCell>
           <TableCell>
             <StatusChip
-              currentValue={worker.fecha_baja ? "inactive" : "active"}
+              currentValue={worker.estado}
               options={[
-                { label: v.entities.workers.status.active, value: "active", color: "success" },
-                { label: v.entities.workers.status.inactive, value: "inactive", color: "default" },
+                { label: v.entities.workers.status.active, value: "activo", color: "success" },
+                { label: v.entities.workers.status.inactive, value: "inactivo", color: "default" },
               ]}
               canChange={false} // En la tabla quizás prefieres que solo se cambie desde el menú de acciones
             />
