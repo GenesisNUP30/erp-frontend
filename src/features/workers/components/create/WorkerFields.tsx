@@ -237,30 +237,31 @@ export default function WorkerFields({
             <FormHelperText>{getError("estado")}</FormHelperText>
           </FormControl>
 
-          {estadoActual === "inactivo" && (
-            <FormControl
-              error={!!getError("fecha_baja")}
-              sx={{ flex: "1 1 200px" }}
-            >
-              <Controller
-                name="fecha_baja"
-                control={control}
-                render={({ field }) => (
-                  <DatePicker
-                    label="Fecha de baja"
-                    value={field.value ? dayjs(field.value) : null}
-                    onChange={(date) =>
-                      field.onChange(date?.format("YYYY-MM-DD") || null)
-                    }
-                    slotProps={{
-                      textField: { error: !!getError("fecha_baja") },
-                    }}
-                  />
-                )}
-              />
-              <FormHelperText>{getError("fecha_baja")}</FormHelperText>
-            </FormControl>
-          )}
+          <FormControl
+            error={!!getError("fecha_baja")}
+            sx={{
+              flex: "1 1 200px",
+              visibility: estadoActual === "inactivo" ? "visible" : "hidden",
+            }}
+          >
+            <Controller
+              name="fecha_baja"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  label="Fecha de baja"
+                  value={field.value ? dayjs(field.value) : null}
+                  onChange={(date) =>
+                    field.onChange(date?.format("YYYY-MM-DD") || null)
+                  }
+                  slotProps={{
+                    textField: { error: !!getError("fecha_baja") },
+                  }}
+                />
+              )}
+            />
+            <FormHelperText>{getError("fecha_baja")}</FormHelperText>
+          </FormControl>
         </Box>
       </Box>
     </LocalizationProvider>
