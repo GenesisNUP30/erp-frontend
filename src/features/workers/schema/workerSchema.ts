@@ -18,6 +18,7 @@ const baseWorkerSchema = z.object({
     .regex(/^[67][0-9]{8}$/, v.createForm.errors.phoneInvalid),
   rol: z.string().min(1, v.createForm.errors.roleRequired) as z.ZodType<Role>,
   fecha_alta: z.string().min(1, v.createForm.errors.dateRequired),
+  estado: z.enum(["activo", "inactivo"]).default("activo"),
   username: z.string().optional().or(z.literal("")),
   email: z
     .string()
@@ -29,7 +30,10 @@ const baseWorkerSchema = z.object({
 // 2. Esquema específico para CREAR (Password Obligatoria)
 export const createWorkerSchema = baseWorkerSchema
   .extend({
-    password: z.string().min(1, v.createForm.errors.passwordRequired).min(8, v.createForm.errors.passwordMin),
+    password: z
+      .string()
+      .min(1, v.createForm.errors.passwordRequired)
+      .min(8, v.createForm.errors.passwordMin),
   })
   .refine((data) => data.username || data.email, {
     message: "Usuario o Email obligatorio",
@@ -49,8 +53,21 @@ export const updateWorkerSchema = baseWorkerSchema
   .refine((data) => data.username || data.email, {
     message: "Usuario o Email obligatorio",
     path: ["username"],
-  });
+  })
+  .refine(
+    (data) => {
+      if (data.estado === "inactivo") {
+        // Si está inactivo, debe haber un valor en fecha_baja
+        return !!data.fecha_baja;
+      }
+      return true; // Si está activo, no importa la fecha
+    },
+    {
+      message: "La fecha de baja es obligatoria si el trabajador está inactivo",
+      path: ["fecha_baja"],
+    },
+  );
 
 export type WorkerFormData = z.infer<typeof createWorkerSchema> & {
-    fecha_baja?: string | null;
+  fecha_baja?: string | null;
 };

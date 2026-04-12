@@ -1,6 +1,6 @@
 import type { Role } from '../../../constants/roles';
 import type { WorkerFormData } from '../schema/workerSchema';
-import type { CreateWorkerDTO } from '../types/IWorkers';
+import type { CreateWorkerDTO, UpdateWorkerDTO } from '../types/IWorkers';
 
 /**
  * Mapea datos del formulario → DTO del backend
@@ -16,4 +16,10 @@ export const mapWorkerFormToCreateDTO = (
   telefono: data.telefono,
   rol: data.rol as Role,
   fecha_alta: data.fecha_alta,
+  estado: data.estado,
+});
+
+export const mapWorkerFormToUpdateDTO = (data: WorkerFormData): UpdateWorkerDTO => ({
+  ...mapWorkerFormToCreateDTO(data),
+  fecha_baja: data.estado === 'activo' ? null : data.fecha_baja,
 });
