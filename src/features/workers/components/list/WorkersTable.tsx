@@ -4,6 +4,7 @@ import type { HeaderOption } from "../../../../components/shared/tables/types";
 import type { Worker } from "../../types/IWorkers";
 import v from "../../../../validations/validations";
 import StatusChip from "../../../../components/shared/StatusChip";
+import { workerStatusOptions } from '../../constants/workerStatusOptions';
 
 interface Props {
   workers: Worker[];
@@ -43,11 +44,8 @@ export default function WorkersTable({
           </TableCell>
           <TableCell>
             <StatusChip
-              currentValue={worker.fecha_baja ? "inactive" : "active"}
-              options={[
-                { label: v.entities.workers.status.active, value: "active", color: "success" },
-                { label: v.entities.workers.status.inactive, value: "inactive", color: "default" },
-              ]}
+              currentValue={worker.estado}
+              options={workerStatusOptions}
               canChange={false} // En la tabla quizás prefieres que solo se cambie desde el menú de acciones
             />
           </TableCell>

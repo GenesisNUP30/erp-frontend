@@ -12,15 +12,23 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Controller } from "react-hook-form";
-import type { Control, UseFormRegister, FieldErrors } from "react-hook-form";
+import type {
+  Control,
+  UseFormRegister,
+  FieldErrors,
+  UseFormSetValue,
+} from "react-hook-form";
 import type { WorkerFormData } from "../../schema/workerSchema";
 import v from "../../../../validations/validations";
 import dayjs from "dayjs";
+import { useWatch } from "react-hook-form";
+import { useEffect } from "react";
 
 interface Props {
   register: UseFormRegister<any>;
   errors: FieldErrors<any>;
   control: Control<WorkerFormData>;
+  setValue: UseFormSetValue<any>;
   serverErrors?: Record<string, string[]> | null;
   canEditRol?: boolean;
 }
@@ -29,13 +37,21 @@ export default function WorkerFields({
   register,
   errors,
   control,
+  setValue,
   serverErrors,
   canEditRol = true,
 }: Props) {
+  const estadoActual = useWatch({ control, name: "estado" });
+
+  // 2. Si cambia a activo, limpiamos la fecha internamente
+  useEffect(() => {
+    if (estadoActual === "activo") {
+      setValue("fecha_baja", null);
+    }
+  }, [estadoActual, setValue]);
+
   // Función auxiliar para obtener el mensaje de error
   const getError = (fieldName: string) => {
-    // Cambia el tipo a string para ser más flexible
-    // Prioridad: Error de Zod (Frontend)
     if (errors[fieldName as keyof FieldErrors<WorkerFormData>]) {
       return errors[fieldName as keyof FieldErrors<WorkerFormData>]
         ?.message as string;
@@ -201,6 +217,50 @@ export default function WorkerFields({
               {...register("password")}
             />
             <FormHelperText>{getError("password")}</FormHelperText>
+          </FormControl>
+        </Box>
+
+        {/* Fila Nueva: Estado y Fecha de Baja */}
+        <Box display="flex" gap={2} flexWrap="wrap">
+          <FormControl error={!!getError("estado")} sx={{ flex: "1 1 200px" }}>
+            <InputLabel id="estado-label">Estado</InputLabel>
+            <Controller
+              name="estado"
+              control={control}
+              render={({ field }) => (
+                <Select {...field} labelId="estado-label" label="Estado">
+                  <MenuItem value="activo">Activo</MenuItem>
+                  <MenuItem value="inactivo">Inactivo</MenuItem>
+                </Select>
+              )}
+            />
+            <FormHelperText>{getError("estado")}</FormHelperText>
+          </FormControl>
+
+          <FormControl
+            error={!!getError("fecha_baja")}
+            sx={{
+              flex: "1 1 200px",
+              visibility: estadoActual === "inactivo" ? "visible" : "hidden",
+            }}
+          >
+            <Controller
+              name="fecha_baja"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  label="Fecha de baja"
+                  value={field.value ? dayjs(field.value) : null}
+                  onChange={(date) =>
+                    field.onChange(date?.format("YYYY-MM-DD") || null)
+                  }
+                  slotProps={{
+                    textField: { error: !!getError("fecha_baja") },
+                  }}
+                />
+              )}
+            />
+            <FormHelperText>{getError("fecha_baja")}</FormHelperText>
           </FormControl>
         </Box>
       </Box>

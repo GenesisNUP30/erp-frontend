@@ -11,6 +11,7 @@ export interface Worker {
   dni: string;
   telefono: string;
   rol: Role;
+  estado: 'activo' | 'inactivo';
   fecha_alta: string;
   fecha_baja: string | null;
 }
@@ -27,6 +28,7 @@ export interface CreateWorkerDTO {
   telefono: string;
   rol: Role;
   fecha_alta: string;
+  estado: 'activo' | 'inactivo';
 }
 
 /**
@@ -41,5 +43,6 @@ export interface UpdateWorkerDTO {
   telefono?: string;
   rol?: Role;
   fecha_alta?: string;
+  estado?: 'activo' | 'inactivo';
   fecha_baja?: string | null;
 }

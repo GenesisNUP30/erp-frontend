@@ -24,7 +24,7 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
   // Solo el administrador puede editar el rol
   const canEditRol = currentUser?.rol === "administrador";
 
-  const { control, handleSubmit, register, formState: { errors, isDirty } } = useForm<WorkerFormData>({
+  const { control, handleSubmit, register, setValue, formState: { errors, isDirty } } = useForm<WorkerFormData>({
     resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
       name: initialData.name,
@@ -33,7 +33,9 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
       dni: initialData.dni,
       telefono: initialData.telefono,
       rol: initialData.rol,
+      estado: initialData.estado || 'activo',
       fecha_alta: initialData.fecha_alta,
+      fecha_baja: initialData.fecha_baja,
       password: "", 
     } as WorkerFormData, // Rellenamos el formulario con los datos actuales
   });
@@ -42,7 +44,7 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
     <Paper sx={{ p: 3, borderRadius: '12px' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         {/* Usar campos ya definidos */}
-        <WorkerFields control={control as any} errors={errors} register={register} serverErrors={serverErrors} canEditRol={canEditRol}/>
+        <WorkerFields control={control as any} errors={errors} register={register} setValue={setValue} serverErrors={serverErrors} canEditRol={canEditRol}/>
         
         <Box mt={4} display="flex" justifyContent="flex-end" gap={2}>
           <Button variant="contained" type="submit" disabled={loading || !isDirty}>
