@@ -50,9 +50,7 @@ export default function StatusChip({
         onClick={canChange ? handleClick : undefined}
         icon={
           currentStatus.icon ? (
-            <Box sx={{ display: "flex", alignItems: "center", pl: "4px" }}>
-              {currentStatus.icon}
-            </Box>
+            (currentStatus.icon as React.ReactElement)
           ) : (
             <CircleIcon sx={{ fontSize: "10px !important" }} />
           )
