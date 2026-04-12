@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { deleteWorkerRequest } from '../services/workersService';
+import { useState } from "react";
+import { deleteWorkerRequest } from "../services/workerService";
 
 export default function useDeleteWorker(onSuccess: () => void) {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,7 @@ export default function useDeleteWorker(onSuccess: () => void) {
 
       return response;
     } catch (error) {
-      console.error('Error eliminando trabajador:', error);
+      console.error("Error eliminando trabajador:", error);
       throw error;
     } finally {
       setLoading(false);

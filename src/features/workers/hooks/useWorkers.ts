@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Worker } from "../types/IWorkers";
-import { getWorkersRequest } from "../services/workersService";
+import { getWorkersRequest } from "../services/workerService";
 
 export default function useWorkers() {
   const [workers, setWorkers] = useState<Worker[]>([]);
@@ -15,7 +15,6 @@ export default function useWorkers() {
 
       setWorkers(data);
     } catch (error: any) {
-      
       console.error("Error cargando trabajadores:", error);
     } finally {
       setLoading(false);

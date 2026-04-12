@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Worker } from "../types/IWorkers";
-import { getWorkerByIdRequest } from "../services/workersService";
+import { getWorkerByIdRequest } from "../services/workerService";
 
 export default function useWorkerDetails() {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +34,6 @@ export default function useWorkerDetails() {
     worker,
     loading,
     error,
-    refresh: () => id && fetchWorker(id)
+    refresh: () => id && fetchWorker(id),
   };
 }
-

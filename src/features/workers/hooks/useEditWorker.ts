@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   getWorkerByIdRequest,
   updateWorkerRequest,
-} from "../services/workersService";
+} from "../services/workerService";
 import { ROUTES } from "../../../routes/routes";
 import type { UpdateWorkerDTO, Worker } from "../types/IWorkers";
 import type { WorkerFormData } from "../schema/workerSchema";
