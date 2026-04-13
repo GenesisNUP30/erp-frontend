@@ -65,7 +65,7 @@ export const toastItem = (
   );
 };
 
-const Notifications = () => (
+const NotificationsComponent = () => (
   <Toaster
     position="top-center"
     toastOptions={{
@@ -78,4 +78,4 @@ const Notifications = () => (
   />
 );
 
-export default Notifications;
+export default NotificationsComponent;
