@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routes/AppRouter";
 import ThemeProvider from "./providers/ThemeProvider";
+import NotificationsComponent from "./components/shared/NotificationsComponent";
 
 function App() {
   const baseName = import.meta.env.PROD
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       <ThemeProvider>
+        <NotificationsComponent />
         <BrowserRouter basename={baseName}>
           <AppRouter />
         </BrowserRouter>
