@@ -11,6 +11,7 @@ interface Props {
   loading: boolean;
   onViewDetails: (worker: Worker) => void;
   onEditWorker: (worker: Worker) => void;
+  onDeleteWorker: (worker: Worker) => void;
 }
 
 export default function WorkersTable({
@@ -18,6 +19,7 @@ export default function WorkersTable({
   loading,
   onViewDetails,
   onEditWorker,
+  onDeleteWorker,
 }: Props) {
   // Definimos las columnas
   const headers: HeaderOption[] = [
@@ -32,9 +34,10 @@ export default function WorkersTable({
       loading={loading}
       items={workers}
       headers={headers}
-      menuList={["details", "edit"]}
+      menuList={["details", "edit", "delete"]}
       onDetails={onViewDetails}
       onEdit={onEditWorker}
+      onDelete={onDeleteWorker}
       renderRow={(worker: Worker) => (
         <>
           <TableCell>{worker.name}</TableCell>

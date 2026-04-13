@@ -36,6 +36,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<WorkerFormData>({
     resolver: zodResolver(createWorkerSchema) as any,
@@ -47,7 +48,9 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
       dni: '',
       telefono: '',
       rol: '' as any,
+      estado: 'activo',
       fecha_alta: new Date().toISOString().split('T')[0], // Fecha de hoy por defecto
+      fecha_baja: null,
       password: '',
     } as WorkerFormData,
   });
@@ -93,6 +96,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
             register={register} 
             errors={errors} 
             control={control as any} 
+            setValue={setValue}
             serverErrors={serverErrors}
           />
         </Box>
