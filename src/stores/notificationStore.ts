@@ -21,10 +21,11 @@ export const useNotificationStore = create<NotificationState>((set, get) => ({
     if (get().isBlocked) return;
 
     set({ isBlocked: true });
+    console.log("Lanzando notificación:", message)
 
     toast.custom((t) => (t.visible ? toastItem(message, type, action) : null), { duration: 3000 });
 
-    // 🔹 Libera después de 3s (coincide con la duración del toast)
+    // Libera después de 3s (coincide con la duración del toast)
     setTimeout(() => {
       set({ isBlocked: false });
     }, 3000);

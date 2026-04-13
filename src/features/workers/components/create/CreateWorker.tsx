@@ -16,6 +16,7 @@ import type { WorkerFormData } from '../../schema/workerSchema';
 import useCreateWorker from '../../hooks/useCreateWorker';
 import WorkerFields from './WorkerFields';
 import v from '../../../../validations/validations';
+import { useNotificationStore } from '../../../../stores/notificationStore';
 
 interface Props {
   open: boolean;
@@ -29,6 +30,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
     reset(); // Limpiamos el formulario al tener éxito
     onSuccess(); // Refrescamos la lista y cerramos el modal
   });
+  const { postNotification } = useNotificationStore();
 
   // Configuración de React Hook Form
   const {
@@ -58,6 +60,7 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
   const onSubmit = async (data: WorkerFormData) => {
     try {
       await createWorker(data);
+      postNotification("Trabajador creado con éxito", "success");
     } catch (error) {
       console.error("Error en el componente CreateWorker:", error);
     }

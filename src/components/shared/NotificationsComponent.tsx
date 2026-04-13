@@ -24,7 +24,7 @@ export const toastItem = (
 
         borderRadius: 2,
 
-        backgroundColor: alpha(theme.palette.background.paper, 0.85),
+        backgroundColor: alpha(theme.palette.notifications.main, 0.85),
         backdropFilter: 'blur(8px)',
 
         border: `1px solid ${
@@ -33,7 +33,7 @@ export const toastItem = (
 
         boxShadow: '0 6px 20px rgba(0,0,0,0.25)',
 
-        color: '#fff',
+        color: theme.palette.notifications.text,
       })}
     >
       <Icon
