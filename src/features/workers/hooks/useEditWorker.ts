@@ -5,12 +5,14 @@ import {
   updateWorkerRequest,
 } from "../services/workerService";
 import { ROUTES } from "../../../routes/routes";
+import { useNotificationStore } from "../../../stores/notificationStore";
 import type { UpdateWorkerDTO, Worker } from "../types/IWorkers";
 import type { WorkerFormData } from "../schema/workerSchema";
 
 export default function useEditWorker() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { postNotification } = useNotificationStore();
 
   const [worker, setWorker] = useState<Worker | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,7 +28,13 @@ export default function useEditWorker() {
     if (id) {
       getWorkerByIdRequest(id)
         .then(setWorker)
-        .catch((err) => setError(err.message))
+        .catch((err) => {
+          setError(err.message);
+          postNotification(
+            "No se pudo cargar la información del trabajador",
+            "error",
+          );
+        })
         .finally(() => setLoading(false));
     }
   }, [id]);
@@ -37,10 +45,20 @@ export default function useEditWorker() {
       setUpdating(true);
       setServerErrors(null);
       await updateWorkerRequest(id, data as UpdateWorkerDTO);
-      navigate(ROUTES.WORKER_DETAILS.replace(":id", id));
+
+      // Lanzamos notificación de éxito
+      postNotification("Trabajador actualizado correctamente", "success");
+
+      navigate(ROUTES.WORKERS);
     } catch (err: any) {
       if (err.status === 422) {
         setServerErrors(err.errors);
+        postNotification("Revisa los errores en el formulario", "error");
+      } else {
+        postNotification(
+          err.message || "Error al actualizar el trabajador",
+          "error",
+        );
       }
       setUpdating(false);
       throw err;
