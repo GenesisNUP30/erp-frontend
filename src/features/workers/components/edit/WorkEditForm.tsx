@@ -28,6 +28,7 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
     resolver: zodResolver(updateWorkerSchema) as any,
     defaultValues: {
       name: initialData.name,
+      //TODO: Si no relleno usuario me saler error: Invalid input: expected string, received null. Si le doy una segunda vez al boton si funciona
       username: initialData.username,
       email: initialData.email ?? undefined,
       dni: initialData.dni,
@@ -35,6 +36,7 @@ export default function WorkerEditForm({ initialData, onSubmit, loading, serverE
       rol: initialData.rol,
       estado: initialData.estado || 'activo',
       fecha_alta: initialData.fecha_alta,
+      //TODO: si pongo una fecha de baja anterior a la de alta me sale el error pero en ingles. Arreglar backend
       fecha_baja: initialData.fecha_baja,
       password: "", 
     } as WorkerFormData, // Rellenamos el formulario con los datos actuales
