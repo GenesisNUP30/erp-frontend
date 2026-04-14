@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { deleteParcelaRequest } from "../services/parcelaService";
+import { useNotificationStore } from "../../../stores/notificationStore";
 
 export default function useDeleteParcela(onSuccess: () => void) {
   const [loading, setLoading] = useState(false);
+  const { postNotification } = useNotificationStore();
 
   const deleteParcela = async (id: number) => {
     try {
       setLoading(true);
-      await deleteParcelaRequest(id);
+      const response = await deleteParcelaRequest(id);
+
+      // Notificación de éxito
+      postNotification(response.message || "Parcela eliminada", "success");
       onSuccess();
     } catch (error) {
       console.error("Error eliminando parcela:", error);
