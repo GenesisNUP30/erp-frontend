@@ -19,6 +19,7 @@ export default function useCreateParcela(onSuccess: () => void) {
       await createParcelaRequest(mapParcelaFormToCreateDTO(formData));
 
       // Notificación de éxito
+      //TODO: Usar archivo de validaciones.ts para los mensajes de exito/error
       postNotification("Parcela creada con éxito", "success");
       onSuccess();
     } catch (error: any) {
