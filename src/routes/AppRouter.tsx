@@ -7,6 +7,9 @@ import MainLayout from "../components/layouts/MainLayout";
 import WorkersPage from "../features/workers/pages/WorkersPage";
 import WorkerDetailsPage from "../features/workers/pages/WorkerDetailsPage";
 import WorkerEditPage from "../features/workers/pages/WorkerEditPage";
+import ParcelasPage from "../features/parcelas/pages/ParcelasPage";
+import ParcelaDetailPage from "../features/parcelas/pages/ParcelaDetailPage";
+import ParcelaEditPage from "../features/parcelas/pages/ParcelaEditPage";
 
 export default function AppRouter() {
   return (
@@ -21,9 +24,16 @@ export default function AppRouter() {
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
           <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
+
+          {/* Workers */}
           <Route path={ROUTES.WORKERS} element={<WorkersPage />} />
           <Route path={ROUTES.WORKER_DETAILS} element={<WorkerDetailsPage />} />
           <Route path={ROUTES.WORKER_EDIT} element={<WorkerEditPage />} />
+
+          {/* Parcelas */}
+          <Route path={ROUTES.PARCELAS} element={<ParcelasPage />} />
+          <Route path={ROUTES.PARCELA_DETAILS} element={<ParcelaDetailPage />} />
+          <Route path={ROUTES.PARCELA_EDIT} element={<ParcelaEditPage />} />
         </Route>
       </Route>
     </Routes>

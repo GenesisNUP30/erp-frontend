@@ -20,12 +20,30 @@ const validations = {
       },
       status: {
         active: "Activo",
-        inactive: "Inactivo"
+        inactive: "Inactivo",
       },
       // Mensajes de éxito estándar
       createdSuccess: "¡El trabajador ha sido creado exitosamente!",
       updatedSuccess: "¡El trabajador ha sido actualizado exitosamente!",
       deletedSuccess: "¡El trabajador ha sido eliminado exitosamente!",
+    },
+    parcelas: {
+      singular: "parcela",
+      plural: "parcelas",
+      labels: {
+        nombre: "Nombre",
+        superficie_hectareas: "Superficie (ha)",
+        ubicacion: "Ubicación",
+        estado: "Estado",
+      },
+      status: {
+        activa: "Activa",
+        inactiva: "Inactiva",
+        en_mantenimiento: "En mantenimiento",
+      },
+      createdSuccess: "¡La parcela ha sido creada exitosamente!",
+      updatedSuccess: "¡La parcela ha sido actualizada exitosamente!",
+      deletedSuccess: "¡La parcela ha sido eliminada exitosamente!",
     },
     // Aquí irás añadiendo: campaigns, plots, etc.
   },
@@ -35,7 +53,10 @@ const validations = {
       username: "Usuario",
       role: "Rol",
       status: "Estado",
-    }
+      nombre: "Nombre",
+      superficie: "Superficie (ha)",
+      ubicacion: "Ubicación",
+    },
   },
   createForm: {
     // Estándares de Títulos
@@ -50,10 +71,10 @@ const validations = {
     },
     // Errores específicos (Basados en tu Backend Laravel)
     errors: {
-      nameRequired: 'El nombre es obligatorio',
-      nameMaxLength: 'El nombre no puede superar los 60 caracteres',
+      nameRequired: "El nombre es obligatorio",
+      nameMaxLength: "El nombre no puede superar los 60 caracteres",
       nameInvalid: "El nombre contiene caracteres no válidos",
-      usernameEmailRequired: 'Debes introducir el nombre de usuario o el email',
+      usernameEmailRequired: "Debes introducir el nombre de usuario o el email",
       dniRequired: "El DNI es obligatorio",
       dniInvalid: "Formato de DNI no válido (ej: 12345678Z)",
       phoneRequired: "El teléfono es obligatorio",
@@ -71,8 +92,8 @@ const validations = {
     subtitle: "Información detallada",
     fields: {
       fecha_baja: "Fecha de baja",
-    }
-  }
+    },
+  },
 };
 
 export default validations;

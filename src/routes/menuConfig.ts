@@ -21,4 +21,10 @@ export const MENU_ITEMS: MenuItem[] = [
     icon: 'People',
     roles: ['administrador', 'encargado'],
   },
+  {
+    title: 'Parcelas',
+    path: '/parcelas',
+    icon: 'LocationCity',
+    roles: ['administrador', 'encargado', 'recolector'],
+  },
 ];
