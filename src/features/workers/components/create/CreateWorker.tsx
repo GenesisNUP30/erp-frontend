@@ -43,7 +43,6 @@ export default function CreateWorker({ open, onClose, onSuccess }: Props) {
     defaultValues: {
       name: '',
       username: '',
-      //TODO: El back devuelve email obligatorio y debe ser opcional
       email: '',
       dni: '',
       telefono: '',
