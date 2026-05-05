@@ -74,6 +74,9 @@ const validations = {
       nombre: "Nombre",
       superficie: "Superficie (ha)",
       ubicacion: "Ubicación",
+      fecha_inicio: "Fecha de inicio",
+      fecha_fin: "Fecha de fin",
+      descripcion: "Descripción",
     },
   },
   createForm: {
