@@ -14,7 +14,7 @@ export const campaniaStatusOptions: StatusOption[] = [
   {
     label: v.entities.campanias.status.finalizada,
     value: 'finalizada',
-    color: 'default',
+    color: 'warning',
     icon: <FlagIcon sx={{ fontSize: '16px' }} />,
   },
   {

@@ -42,7 +42,7 @@ export default function useEditCampania() {
 
       postNotification("Campaña actualizada con éxito", "success");
 
-      navigate(ROUTES.CAMPANIA);
+      navigate(ROUTES.CAMPANIAS);
     } catch (err: any) {
       if (err.status === 422) {
         setServerErrors(err.errors);

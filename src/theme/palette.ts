@@ -28,7 +28,7 @@ export const palette = {
     main: "#0288d1",
     light: "#4fc3f7",
   },
-  // Nueva sección específica para notificaciones y elementos flotantes
+  // Notificaciones y elementos flotantes
   notifications: {
     main: "#1e1e1e", // Fondo oscuro tipo pizarra
     text: "#ffffff",
