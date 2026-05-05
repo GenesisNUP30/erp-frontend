@@ -17,14 +17,20 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     title: 'Trabajadores',
-    path: '/trabajadores',
+    path: ROUTES.WORKERS,
     icon: 'People',
     roles: ['administrador', 'encargado'],
   },
   {
     title: 'Parcelas',
-    path: '/parcelas',
+    path: ROUTES.PARCELAS,
     icon: 'LocationCity',
-    roles: ['administrador', 'encargado', 'recolector'],
+    roles: ['administrador', 'encargado'],
   },
+  {
+    title: 'Campañas',
+    path: ROUTES.CAMPANIAS,
+    icon: 'Event',
+    roles: ['administrador', 'encargado'],
+  }
 ];
