@@ -49,7 +49,7 @@ export default function WorkersTable({
             <StatusChip
               currentValue={worker.estado}
               options={workerStatusOptions}
-              canChange={false} // En la tabla quizás prefieres que solo se cambie desde el menú de acciones
+              canChange={false}
             />
           </TableCell>
         </>
