@@ -10,6 +10,9 @@ import WorkerEditPage from "../features/workers/pages/WorkerEditPage";
 import ParcelasPage from "../features/parcelas/pages/ParcelasPage";
 import ParcelaDetailPage from "../features/parcelas/pages/ParcelaDetailPage";
 import ParcelaEditPage from "../features/parcelas/pages/ParcelaEditPage";
+import CampaniasPage from "../features/campanias/pages/CampaniasPage";
+import CampaniaDetailPage from "../features/campanias/pages/CampaniaDetailPage";
+import CampaniaEditPage from "../features/campanias/pages/CampaniaEditPage";
 
 export default function AppRouter() {
   return (
@@ -34,6 +37,11 @@ export default function AppRouter() {
           <Route path={ROUTES.PARCELAS} element={<ParcelasPage />} />
           <Route path={ROUTES.PARCELA_DETAILS} element={<ParcelaDetailPage />} />
           <Route path={ROUTES.PARCELA_EDIT} element={<ParcelaEditPage />} />
+
+          {/* Campañas */}
+          <Route path={ROUTES.CAMPANIAS} element={<CampaniasPage />} />
+          <Route path={ROUTES.CAMPANIA_DETAILS} element={<CampaniaDetailPage />} />
+          <Route path={ROUTES.CAMPANIA_EDIT} element={<CampaniaEditPage />} />
         </Route>
       </Route>
     </Routes>

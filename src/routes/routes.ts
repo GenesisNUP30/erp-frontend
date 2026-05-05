@@ -12,4 +12,9 @@ export const ROUTES = {
   PARCELAS: "/parcelas", // Ruta para la lista
   PARCELA_DETAILS: "/parcelas/detalles/:id", // Ruta para el detalle
   PARCELA_EDIT: "/parcelas/editar/:id", // Ruta para el editar
+
+  // Campañas
+  CAMPANIAS: "/campanias", // Ruta para la lista
+  CAMPANIA_DETAILS: "/campanias/detalles/:id", // Ruta para el detalle
+  CAMPANIA_EDIT: "/campanias/editar/:id", // Ruta para el editar
 } as const;
