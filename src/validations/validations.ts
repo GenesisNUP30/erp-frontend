@@ -45,7 +45,25 @@ const validations = {
       updatedSuccess: "¡La parcela ha sido actualizada exitosamente!",
       deletedSuccess: "¡La parcela ha sido eliminada exitosamente!",
     },
-    // Aquí irás añadiendo: campaigns, plots, etc.
+    campanias: {
+      singular: "campaña",
+      plural: "campañas",
+      labels: {
+        nombre: "Nombre",
+        fecha_inicio: "Fecha de inicio",
+        fecha_fin: "Fecha de fin",
+        descripcion: "Descripción",
+        estado: "Estado",
+      },
+      status: {
+        activa: "Activa",
+        finalizada: "Finalizada",
+        planificada: "Planificada",
+      },
+      createdSuccess: "¡La campaña ha sido creada exitosamente!",
+      updatedSuccess: "¡La campaña ha sido actualizada exitosamente!",
+      deletedSuccess: "¡La campaña ha sido eliminada exitosamente!",
+    },
   },
   tableList: {
     headers: {
