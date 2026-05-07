@@ -13,6 +13,11 @@ export const ROUTES = {
   PARCELA_DETAILS: "/parcelas/detalles/:id", // Ruta para el detalle
   PARCELA_EDIT: "/parcelas/editar/:id", // Ruta para el editar
 
+  // Variedades
+  VARIEDADES: "/variedades", // Ruta para la lista
+  VARIEDAD_DETAILS: "/variedades/detalles/:id", // Ruta para el detalle
+  VARIEDAD_EDIT: "/variedades/editar/:id", // Ruta para el editar
+
   // Campañas
   CAMPANIAS: "/campanias", // Ruta para la lista
   CAMPANIA_DETAILS: "/campanias/detalles/:id", // Ruta para el detalle
