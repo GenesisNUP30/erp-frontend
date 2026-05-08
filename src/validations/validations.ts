@@ -52,9 +52,8 @@ const validations = {
         nombre: "Nombre",
         tipo: "Tipo",
         descripcion: "Descripción",
-        estado: "Estado",
       },
-      type: {
+      tipos: {
         remontante: "Remontante",
         no_remontante: "No remontante",
       },

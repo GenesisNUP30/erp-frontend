@@ -4,7 +4,8 @@ export interface Variedad {
     id: number;
     nombre: string;
     tipo: TipoVariedad;
-    descripcion: string;
+    descripcion: string | null;
+    plantaciones_count?: number;
 }
 
 export interface CreateVariedadDTO {
