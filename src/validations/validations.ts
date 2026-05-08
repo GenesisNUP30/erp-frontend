@@ -52,6 +52,7 @@ const validations = {
         nombre: "Nombre",
         tipo: "Tipo",
         descripcion: "Descripción",
+        plantaciones_count: "Plantaciones Vinculadas",
       },
       tipos: {
         remontante: "Remontante",
