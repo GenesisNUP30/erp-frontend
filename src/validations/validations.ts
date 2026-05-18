@@ -45,6 +45,23 @@ const validations = {
       updatedSuccess: "¡La parcela ha sido actualizada exitosamente!",
       deletedSuccess: "¡La parcela ha sido eliminada exitosamente!",
     },
+    variedades: {
+      singular: "variedad",
+      plural: "variedades",
+      labels: {
+        nombre: "Nombre",
+        tipo: "Tipo",
+        descripcion: "Descripción",
+        plantaciones_count: "Plantaciones Vinculadas",
+      },
+      tipos: {
+        remontante: "Remontante",
+        no_remontante: "No remontante",
+      },
+      createdSuccess: "¡La variedad ha sido creada exitosamente!",
+      updatedSuccess: "¡La variedad ha sido actualizada exitosamente!",
+      deletedSuccess: "¡La variedad ha sido eliminada exitosamente!",
+    },
     campanias: {
       singular: "campaña",
       plural: "campañas",
@@ -77,6 +94,7 @@ const validations = {
       fecha_inicio: "Fecha de inicio",
       fecha_fin: "Fecha de fin",
       descripcion: "Descripción",
+      tipo: "Tipo",
     },
   },
   createForm: {
@@ -90,7 +108,7 @@ const validations = {
       edit: "Guardar cambios",
       cancel: "Cancelar",
     },
-    // Errores específicos (Basados en tu Backend Laravel)
+    // Errores 
     errors: {
       nameRequired: "El nombre es obligatorio",
       nameMaxLength: "El nombre no puede superar los 60 caracteres",

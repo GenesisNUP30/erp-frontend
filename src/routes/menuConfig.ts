@@ -24,7 +24,13 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     title: 'Parcelas',
     path: ROUTES.PARCELAS,
-    icon: 'LocationCity',
+    icon: 'GridView',
+    roles: ['administrador', 'encargado'],
+  },
+  {
+    title: 'Variedades',
+    path: ROUTES.VARIEDADES,
+    icon: 'ListAlt',
     roles: ['administrador', 'encargado'],
   },
   {

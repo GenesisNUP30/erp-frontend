@@ -10,6 +10,9 @@ import WorkerEditPage from "../features/workers/pages/WorkerEditPage";
 import ParcelasPage from "../features/parcelas/pages/ParcelasPage";
 import ParcelaDetailPage from "../features/parcelas/pages/ParcelaDetailPage";
 import ParcelaEditPage from "../features/parcelas/pages/ParcelaEditPage";
+import VariedadesPage from "../features/variedades/pages/VariedadesPage";
+import VariedadDetailPage from "../features/variedades/pages/VariedadDetailPage";
+import VariedadEditPage from "../features/variedades/pages/VariedadEditPage";
 import CampaniasPage from "../features/campanias/pages/CampaniasPage";
 import CampaniaDetailPage from "../features/campanias/pages/CampaniaDetailPage";
 import CampaniaEditPage from "../features/campanias/pages/CampaniaEditPage";
@@ -37,6 +40,11 @@ export default function AppRouter() {
           <Route path={ROUTES.PARCELAS} element={<ParcelasPage />} />
           <Route path={ROUTES.PARCELA_DETAILS} element={<ParcelaDetailPage />} />
           <Route path={ROUTES.PARCELA_EDIT} element={<ParcelaEditPage />} />
+
+          {/* Variedades */}
+          <Route path={ROUTES.VARIEDADES} element={<VariedadesPage />} />
+          <Route path={ROUTES.VARIEDAD_DETAILS} element={<VariedadDetailPage />} />
+          <Route path={ROUTES.VARIEDAD_EDIT} element={<VariedadEditPage />} />
 
           {/* Campañas */}
           <Route path={ROUTES.CAMPANIAS} element={<CampaniasPage />} />
