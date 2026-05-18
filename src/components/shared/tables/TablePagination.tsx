@@ -32,7 +32,7 @@ export default function TablePagination({
         </Typography>
         <Select
           value={perPage}
-          onChange={(e) => { onPerPageChange(Number(e.target.value)); onPageChange(1); }}
+          onChange={(e) => onPerPageChange(Number(e.target.value))}
           size="small"
           sx={{ minWidth: 70 }}
         >

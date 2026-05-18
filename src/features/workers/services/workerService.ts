@@ -8,26 +8,23 @@ interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
-  count?: number;
+  meta?: any;
 }
 
 /**
  * GET - Listado de trabajadores
  */
-export const getWorkersRequest = async (): Promise<Worker[]> => {
-  try {
-    const response =
-      await apiClient.get<ApiResponse<Worker[]>>("/trabajadores");
-
-    if (response.data.success) {
-      return response.data.data;
-    }
-
-    throw new Error("Error obteniendo trabajadores");
-  } catch (error) {
-    console.error("getWorkersRequest error:", error);
-    throw error;
+export const getWorkersRequest = async (
+  page = 1,
+  perPage = 5,
+): Promise<{ data: Worker[]; meta: any }> => {
+  const response = await apiClient.get<ApiResponse<Worker[]>>(
+    `/trabajadores?page=${page}&per_page=${perPage}`,
+  );
+  if (response.data.success) {
+    return { data: response.data.data, meta: response.data.meta };
   }
+  throw new Error("Error obteniendo trabajadores");
 };
 
 /**

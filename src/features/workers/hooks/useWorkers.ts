@@ -7,13 +7,22 @@ export default function useWorkers() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const fetchWorkers = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(5);
+  const [meta, setMeta] = useState({
+    current_page: 1,
+    last_page: 1,
+    per_page: 5,
+    total: 0,
+  });
+
+  const fetchWorkers = async (page: number, pp: number) => {
     try {
       setLoading(true);
 
-      const data = await getWorkersRequest();
-
+      const { data, meta } = await getWorkersRequest(page, pp);
       setWorkers(data);
+      setMeta(meta);
     } catch (error: any) {
       console.error("Error cargando trabajadores:", error);
     } finally {
@@ -22,8 +31,19 @@ export default function useWorkers() {
   };
 
   useEffect(() => {
-    fetchWorkers();
+    fetchWorkers(currentPage, perPage);
   }, []);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+    fetchWorkers(page, perPage);
+  };
+
+  const onPerPageChange = (pp: number) => {
+    setPerPage(pp);
+    setCurrentPage(1);
+    fetchWorkers(1, pp);
+  };
 
   const filteredWorkers = workers.filter((worker) =>
     worker.name.toLowerCase().includes(search.toLowerCase()),
@@ -34,6 +54,12 @@ export default function useWorkers() {
     search,
     setSearch,
     loading,
-    refresh: fetchWorkers,
+    refresh: () => fetchWorkers(currentPage, perPage),
+    currentPage,
+    lastPage: meta.last_page,
+    perPage,
+    total: meta.total,
+    onPageChange,
+    onPerPageChange,
   };
 }
