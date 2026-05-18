@@ -43,7 +43,7 @@ export default function VariedadDetailInfo({ variedad }: Props) {
         </>
       )}
 
-      {/* Sección Informativa: Plantaciones (Solo lectura) */}
+      {/* Sección Informativa: Plantaciones */}
       <Divider sx={{ my: 2 }} />
       <Box
         display="flex"
