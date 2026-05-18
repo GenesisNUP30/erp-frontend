@@ -10,9 +10,27 @@ interface Props {
   onViewDetails: (variedad: Variedad) => void;
   onEditVariedad: (variedad: Variedad) => void;
   onDeleteVariedad: (variedad: Variedad) => void;
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+  onPageChange: (page: number) => void;
+  onPerPageChange: (perPage: number) => void;
 }
 
-export default function VariedadesTable({ variedades, loading, onViewDetails, onEditVariedad, onDeleteVariedad }: Props) {
+export default function VariedadesTable({
+  variedades,
+  loading,
+  onViewDetails,
+  onEditVariedad,
+  onDeleteVariedad,
+  currentPage,
+  lastPage,
+  perPage,
+  total,
+  onPageChange,
+  onPerPageChange,
+}: Props) {
   const headers: HeaderOption[] = [
     { id: "nombre", label: v.tableList.headers.nombre },
     { id: "tipo", label: v.tableList.headers.tipo },
@@ -27,6 +45,12 @@ export default function VariedadesTable({ variedades, loading, onViewDetails, on
       onDetails={onViewDetails}
       onEdit={onEditVariedad}
       onDelete={onDeleteVariedad}
+      currentPage={currentPage}
+      lastPage={lastPage}
+      perPage={perPage}
+      total={total}
+      onPageChange={onPageChange}
+      onPerPageChange={onPerPageChange}
       renderRow={(variedad: Variedad) => (
         <>
           <TableCell>{variedad.nombre}</TableCell>

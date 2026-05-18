@@ -12,7 +12,19 @@ import type { Variedad } from "../types/IVariedades";
 
 export default function VariedadesPage() {
   const navigate = useNavigate();
-  const { variedades, search, setSearch, loading, refresh } = useVariedades();
+  const {
+    variedades,
+    search,
+    setSearch,
+    loading,
+    refresh,
+    currentPage,
+    lastPage,
+    perPage,
+    total,
+    onPageChange,
+    onPerPageChange,
+  } = useVariedades();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [variedadToDelete, setVariedadToDelete] = useState<Variedad | null>(
     null,
@@ -52,6 +64,12 @@ export default function VariedadesPage() {
           onViewDetails={handleViewDetails}
           onEditVariedad={handleEditVariedad}
           onDeleteVariedad={setVariedadToDelete}
+          currentPage={currentPage}
+          lastPage={lastPage}
+          perPage={perPage}
+          total={total}
+          onPageChange={onPageChange}
+          onPerPageChange={onPerPageChange}
         />
       )}
       <CreateVariedad
