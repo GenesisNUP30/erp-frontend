@@ -8,14 +8,17 @@ interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
+  meta?: any;
 }
 
 /**
  * GET - Listado de campañas
  */
-export const getCampaniasRequest = async (): Promise<Campania[]> => {
-  const response = await apiClient.get<ApiResponse<Campania[]>>("/campanias");
-  if (response.data.success) return response.data.data;
+export const getCampaniasRequest = async (page = 1, perPage = 5): Promise<{ data: Campania[]; meta: any }> => {
+  const response = await apiClient.get<ApiResponse<Campania[]>>(
+    `/campanias?page=${page}&per_page=${perPage}`
+  );
+  if (response.data.success) return { data: response.data.data, meta: response.data.meta };
   throw new Error("Error obteniendo campañas");
 };
 

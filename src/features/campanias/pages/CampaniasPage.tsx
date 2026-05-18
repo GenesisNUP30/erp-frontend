@@ -12,7 +12,19 @@ import type { Campania } from "../types/ICampanias";
 
 export default function CampaniasPage() {
   const navigate = useNavigate();
-  const { campanias, search, setSearch, loading, refresh } = useCampanias();
+  const {
+    campanias,
+    search,
+    setSearch,
+    loading,
+    refresh,
+    currentPage,
+    lastPage,
+    perPage,
+    total,
+    onPageChange,
+    onPerPageChange,
+  } = useCampanias();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [campaniaToDelete, setCampaniaToDelete] = useState<Campania | null>(
     null,
@@ -52,6 +64,12 @@ export default function CampaniasPage() {
           onViewDetails={handleViewDetails}
           onEditCampania={handleEditCampania}
           onDeleteCampania={setCampaniaToDelete}
+          currentPage={currentPage}
+          lastPage={lastPage}
+          perPage={perPage}
+          total={total}
+          onPageChange={onPageChange}
+          onPerPageChange={onPerPageChange} 
         />
       )}
       <CreateCampania
