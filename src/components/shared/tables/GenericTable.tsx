@@ -1,26 +1,54 @@
-import { useState } from 'react';
-import { 
-  Table, TableBody, TableCell, TableContainer, TableHead, 
-  TableRow, Paper, IconButton, Box, LinearProgress 
-} from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ActionsMenu from '../ActionsMenu'; 
-import type { HeaderOption, TableActionHandlers } from './types';
+import { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Box,
+  LinearProgress,
+} from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ActionsMenu from "../ActionsMenu";
+import type { HeaderOption, TableActionHandlers } from "./types";
+import TablePagination from "./TablePagination";
 
 interface Props extends TableActionHandlers {
   headers: HeaderOption[];
   items: any[];
   loading?: boolean;
-  menuList: ('edit' | 'details' | 'delete')[];
+  menuList: ("edit" | "details" | "delete")[];
   renderRow: (item: any) => React.ReactNode;
+  // Props de paginación
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+  onPageChange: (page: number) => void;
+  onPerPageChange: (perPage: number) => void;
 }
 
-export default function GenericTable({ 
-  headers, items, loading, menuList, renderRow, 
-  onEdit, onDetails, onDelete 
+export default function GenericTable({
+  headers,
+  items,
+  loading,
+  menuList,
+  renderRow,
+  currentPage,
+  lastPage,
+  perPage,
+  total,
+  onPageChange,
+  onPerPageChange,
+  onEdit,
+  onDetails,
+  onDelete,
 }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -34,40 +62,53 @@ export default function GenericTable({
 
   // Mapeo de opciones basado en lo que pidas en menuList
   const options = [
-    { 
-      id: 'details', 
-      label: 'Ver detalle', 
-      icon: <VisibilityIcon fontSize="small" />, 
-      action: onDetails 
+    {
+      id: "details",
+      label: "Ver detalle",
+      icon: <VisibilityIcon fontSize="small" />,
+      action: onDetails,
     },
-    { 
-      id: 'edit', 
-      label: 'Editar', 
-      icon: <EditIcon fontSize="small" />, 
-      action: onEdit 
+    {
+      id: "edit",
+      label: "Editar",
+      icon: <EditIcon fontSize="small" />,
+      action: onEdit,
     },
-    { 
-      id: 'delete', 
-      label: 'Eliminar', 
-      icon: <DeleteIcon fontSize="small" />, 
-      action: onDelete, 
-      color: 'error.main' 
+    {
+      id: "delete",
+      label: "Eliminar",
+      icon: <DeleteIcon fontSize="small" />,
+      action: onDelete,
+      color: "error.main",
     },
-  ].filter(opt => menuList.includes(opt.id as any));
+  ].filter((opt) => menuList.includes(opt.id as any));
 
   return (
-    <Box sx={{ width: '100%', position: 'relative' }}>
-      <TableContainer component={Paper} sx={{ borderRadius: '16px', overflow: 'hidden', mb: 2 }}>
-        {loading && <LinearProgress sx={{ position: 'absolute', width: '100%', top: 0 }} />}
+    <Box sx={{ width: "100%", position: "relative" }}>
+      <TableContainer
+        component={Paper}
+        sx={{ borderRadius: "16px", overflow: "hidden", mb: 2 }}
+      >
+        {loading && (
+          <LinearProgress
+            sx={{ position: "absolute", width: "100%", top: 0 }}
+          />
+        )}
         <Table>
-          <TableHead sx={{ bgcolor: 'rgba(0,0,0,0.02)' }}>
+          <TableHead sx={{ bgcolor: "rgba(0,0,0,0.02)" }}>
             <TableRow>
               {headers.map((h) => (
-                <TableCell key={h.id} align={h.align || 'left'} sx={{ fontWeight: 'bold' }}>
+                <TableCell
+                  key={h.id}
+                  align={h.align || "left"}
+                  sx={{ fontWeight: "bold" }}
+                >
                   {h.label}
                 </TableCell>
               ))}
-              <TableCell align="right" sx={{ fontWeight: 'bold' }}>Acciones</TableCell>
+              <TableCell align="right" sx={{ fontWeight: "bold" }}>
+                Acciones
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -85,15 +126,24 @@ export default function GenericTable({
         </Table>
       </TableContainer>
 
-      <ActionsMenu 
+      <TablePagination
+        currentPage={currentPage}
+        lastPage={lastPage}
+        perPage={perPage}
+        total={total}
+        onPageChange={onPageChange}
+        onPerPageChange={onPerPageChange}
+      />
+
+      <ActionsMenu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        options={options.map(opt => ({
+        options={options.map((opt) => ({
           label: opt.label,
           icon: opt.icon,
           color: opt.color,
-          onClick: () => opt.action?.(selectedItem)
+          onClick: () => opt.action?.(selectedItem),
         }))}
       />
     </Box>

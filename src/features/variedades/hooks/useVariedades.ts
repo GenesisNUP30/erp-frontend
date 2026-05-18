@@ -7,11 +7,21 @@ export default function useVariedades() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const fetchVariedades = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(5);
+  const [meta, setMeta] = useState({
+    current_page: 1,
+    last_page: 1,
+    per_page: 5,
+    total: 0,
+  });
+
+  const fetchVariedades = async (page: number, pp: number) => {
     try {
       setLoading(true);
-      const data = await getVariedadesRequest();
+      const { data, meta } = await getVariedadesRequest(page, pp);
       setVariedades(data);
+      setMeta(meta);
     } catch (error) {
       console.error("Error cargando variedades:", error);
     } finally {
@@ -19,11 +29,36 @@ export default function useVariedades() {
     }
   };
 
-  useEffect(() => { fetchVariedades(); }, []);
+  useEffect(() => {
+    fetchVariedades(currentPage, perPage);
+  }, []);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+    fetchVariedades(page, perPage);
+  };
+
+  const onPerPageChange = (pp: number) => {
+    setPerPage(pp);
+    setCurrentPage(1);
+    fetchVariedades(1, pp);
+  };
 
   const filteredVariedades = variedades.filter((v) =>
-    v.nombre.toLowerCase().includes(search.toLowerCase())
+    v.nombre.toLowerCase().includes(search.toLowerCase()),
   );
 
-  return { variedades: filteredVariedades, search, setSearch, loading, refresh: fetchVariedades };
+  return {
+    variedades: filteredVariedades,
+    search,
+    setSearch,
+    loading,
+    refresh: () => fetchVariedades(currentPage, perPage),
+    currentPage,
+    lastPage: meta.last_page,
+    perPage,
+    total: meta.total,
+    onPageChange,
+    onPerPageChange,
+  };
 }

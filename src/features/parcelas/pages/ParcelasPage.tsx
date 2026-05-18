@@ -12,7 +12,20 @@ import type { Parcela } from "../types/IParcelas";
 
 export default function ParcelasPage() {
   const navigate = useNavigate();
-  const { parcelas, search, setSearch, loading, refresh } = useParcelas();
+  const {
+    parcelas,
+    search,
+    setSearch,
+    loading,
+    refresh,
+    currentPage,
+    lastPage,
+    perPage,
+    total,
+    onPageChange,
+    onPerPageChange,
+  } = useParcelas();
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [parcelaToDelete, setParcelaToDelete] = useState<Parcela | null>(null);
   const { deleteParcela, loading: deleting } = useDeleteParcela(refresh);
@@ -52,6 +65,12 @@ export default function ParcelasPage() {
           onViewDetails={handleViewDetails}
           onEditParcela={handleEditParcela}
           onDeleteParcela={setParcelaToDelete}
+          currentPage={currentPage}
+          lastPage={lastPage}
+          perPage={perPage}
+          total={total}
+          onPageChange={onPageChange}
+          onPerPageChange={onPerPageChange}
         />
       )}
 

@@ -12,9 +12,27 @@ interface Props {
   onViewDetails: (campania: Campania) => void;
   onEditCampania: (campania: Campania) => void;
   onDeleteCampania: (campania: Campania) => void;
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+  onPageChange: (page: number) => void;
+  onPerPageChange: (perPage: number) => void;
 }
 
-export default function CampaniasTable({ campanias, loading, onViewDetails, onEditCampania, onDeleteCampania }: Props) {
+export default function CampaniasTable({
+  campanias,
+  loading,
+  onViewDetails,
+  onEditCampania,
+  onDeleteCampania,
+  currentPage,
+  lastPage,
+  perPage,
+  total,
+  onPageChange,
+  onPerPageChange,
+}: Props) {
   const headers: HeaderOption[] = [
     { id: "nombre", label: v.tableList.headers.nombre },
     { id: "fecha_inicio", label: v.tableList.headers.fecha_inicio },
@@ -31,13 +49,23 @@ export default function CampaniasTable({ campanias, loading, onViewDetails, onEd
       onDetails={onViewDetails}
       onEdit={onEditCampania}
       onDelete={onDeleteCampania}
+      currentPage={currentPage}
+      lastPage={lastPage}
+      perPage={perPage}
+      total={total}
+      onPageChange={onPageChange}
+      onPerPageChange={onPerPageChange}
       renderRow={(campania: Campania) => (
         <>
           <TableCell>{campania.nombre}</TableCell>
           <TableCell>{campania.fecha_inicio}</TableCell>
-          <TableCell>{campania.fecha_fin || '---'}</TableCell>
+          <TableCell>{campania.fecha_fin || "---"}</TableCell>
           <TableCell>
-            <StatusChip currentValue={campania.estado} options={campaniaStatusOptions} canChange={false} />
+            <StatusChip
+              currentValue={campania.estado}
+              options={campaniaStatusOptions}
+              canChange={false}
+            />
           </TableCell>
         </>
       )}

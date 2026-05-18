@@ -12,14 +12,21 @@ interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
+  meta?: any;
 }
 
 /**
  * GET - Listado de parcelas
  */
-export const getParcelasRequest = async (): Promise<Parcela[]> => {
-  const response = await apiClient.get<ApiResponse<Parcela[]>>("/parcelas");
-  if (response.data.success) return response.data.data;
+export const getParcelasRequest = async (
+  page = 1,
+  perPage = 5,
+): Promise<{ data: Parcela[]; meta: any }> => {
+  const response = await apiClient.get<ApiResponse<Parcela[]>>(
+    `/parcelas?page=${page}&per_page=${perPage}`,
+  );
+  if (response.data.success)
+    return { data: response.data.data, meta: response.data.meta };
   throw new Error("Error obteniendo parcelas");
 };
 

@@ -12,9 +12,27 @@ interface Props {
   onViewDetails: (parcela: Parcela) => void;
   onEditParcela: (parcela: Parcela) => void;
   onDeleteParcela: (parcela: Parcela) => void;
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+  onPageChange: (page: number) => void;
+  onPerPageChange: (perPage: number) => void;
 }
 
-export default function ParcelasTable({ parcelas, loading, onViewDetails, onEditParcela, onDeleteParcela }: Props) {
+export default function ParcelasTable({
+  parcelas,
+  loading,
+  onViewDetails,
+  onEditParcela,
+  onDeleteParcela,
+  currentPage,
+  lastPage,
+  perPage,
+  total,
+  onPageChange,
+  onPerPageChange,
+}: Props) {
   const headers: HeaderOption[] = [
     { id: "nombre", label: v.tableList.headers.nombre },
     { id: "superficie_hectareas", label: v.tableList.headers.superficie },
@@ -31,6 +49,12 @@ export default function ParcelasTable({ parcelas, loading, onViewDetails, onEdit
       onDetails={onViewDetails}
       onEdit={onEditParcela}
       onDelete={onDeleteParcela}
+      currentPage={currentPage}
+      lastPage={lastPage}
+      perPage={perPage}
+      total={total}
+      onPageChange={onPageChange}
+      onPerPageChange={onPerPageChange}
       renderRow={(parcela: Parcela) => (
         <>
           <TableCell>{parcela.nombre}</TableCell>

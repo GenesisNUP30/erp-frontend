@@ -9,14 +9,21 @@ interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
+  meta?: any;
 }
 
 /**
  * GET - Listado de variedades
  */
-export const getVariedadesRequest = async (): Promise<Variedad[]> => {
-  const response = await apiClient.get<ApiResponse<Variedad[]>>("/variedades");
-  if (response.data.success) return response.data.data;
+export const getVariedadesRequest = async (
+  page = 1,
+  perPage = 5,
+): Promise<{ data: Variedad[]; meta: any }> => {
+  const response = await apiClient.get<ApiResponse<Variedad[]>>(
+    `/variedades?page=${page}&per_page=${perPage}`,
+  );
+  if (response.data.success)
+    return { data: response.data.data, meta: response.data.meta };
 
   throw new Error("Error obteniendo variedades");
 };

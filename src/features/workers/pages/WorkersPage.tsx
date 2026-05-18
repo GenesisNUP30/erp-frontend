@@ -1,8 +1,4 @@
-import {
-  Box,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 import useWorkers from "../hooks/useWorkers";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../routes/routes";
@@ -16,7 +12,19 @@ import type { Worker } from "../types/IWorkers";
 
 export default function WorkersPage() {
   const navigate = useNavigate();
-  const { workers, search, setSearch, loading, refresh } = useWorkers();
+  const {
+    workers,
+    search,
+    setSearch,
+    loading,
+    refresh,
+    currentPage,
+    lastPage,
+    perPage,
+    total,
+    onPageChange,
+    onPerPageChange,
+  } = useWorkers();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [workerToDelete, setWorkerToDelete] = useState<Worker | null>(null);
   const { deleteWorker, loading: deleting } = useDeleteWorker(refresh);
@@ -76,6 +84,12 @@ export default function WorkersPage() {
           onViewDetails={handleViewDetails}
           onEditWorker={handleEditWorker}
           onDeleteWorker={handleDeleteClick}
+          currentPage={currentPage}
+          lastPage={lastPage}
+          perPage={perPage}
+          total={total}
+          onPageChange={onPageChange}
+          onPerPageChange={onPerPageChange}
         />
       )}
 

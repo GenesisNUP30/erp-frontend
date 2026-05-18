@@ -12,6 +12,12 @@ interface Props {
   onViewDetails: (worker: Worker) => void;
   onEditWorker: (worker: Worker) => void;
   onDeleteWorker: (worker: Worker) => void;
+  currentPage: number;
+  lastPage: number;
+  perPage: number;
+  total: number;
+  onPageChange: (page: number) => void;
+  onPerPageChange: (perPage: number) => void;
 }
 
 export default function WorkersTable({
@@ -20,6 +26,12 @@ export default function WorkersTable({
   onViewDetails,
   onEditWorker,
   onDeleteWorker,
+  currentPage,
+  lastPage,
+  perPage,
+  total,
+  onPageChange,
+  onPerPageChange,
 }: Props) {
   // Definimos las columnas
   const headers: HeaderOption[] = [
@@ -38,6 +50,12 @@ export default function WorkersTable({
       onDetails={onViewDetails}
       onEdit={onEditWorker}
       onDelete={onDeleteWorker}
+      currentPage={currentPage}
+      lastPage={lastPage}
+      perPage={perPage}
+      total={total}
+      onPageChange={onPageChange}
+      onPerPageChange={onPerPageChange}
       renderRow={(worker: Worker) => (
         <>
           <TableCell>{worker.name}</TableCell>
