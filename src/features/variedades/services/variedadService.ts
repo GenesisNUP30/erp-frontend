@@ -20,7 +20,7 @@ export const getVariedadesRequest = async (
   perPage = 5,
 ): Promise<{ data: Variedad[]; meta: any }> => {
   const response = await apiClient.get<ApiResponse<Variedad[]>>(
-    `/variedades?page=${page}&perPage=${perPage}`,
+    `/variedades?page=${page}&per_page=${perPage}`,
   );
   if (response.data.success)
     return { data: response.data.data, meta: response.data.meta };
