@@ -84,7 +84,7 @@ export default function RecoleccionFields({
             <FormHelperText>{getError("cosecha_id")}</FormHelperText>
           </FormControl>
 
-          <FormControl sx={{ flex: "1 1 250px" }}>
+          <FormControl error={!!getError("user_id")} sx={{ flex: "1 1 250px" }}>
             <InputLabel>Recolector</InputLabel>
             <Controller
               name="user_id"
@@ -100,6 +100,7 @@ export default function RecoleccionFields({
                 </Select>
               )}
             />
+            <FormHelperText>{getError("user_id")}</FormHelperText>
           </FormControl>
         </Box>
 
@@ -135,6 +136,7 @@ export default function RecoleccionFields({
                 </Select>
               )}
             />
+            <FormHelperText>{getError("estado")}</FormHelperText>
           </FormControl>
         </Box>
 

@@ -69,23 +69,23 @@ export const deletePlantacionRequest = async (
 };
 
 // Selects
-export const getParcelasActivasRequest = async (): Promise<SelectOption[]> => {
-  const response =
-    await apiClient.get<ApiResponse<SelectOption[]>>("/parcelas/activas");
+export const getParcelasActivasRequest = async (currentId?: number): Promise<SelectOption[]> => {
+  const params = currentId ? `?current_id=${currentId}` : '';
+  const response = await apiClient.get<ApiResponse<SelectOption[]>>(`/parcelas/activas${params}`);
   if (response.data.success) return response.data.data;
   throw new Error("Error obteniendo parcelas");
 };
 
-export const getVariedadesRequest = async (): Promise<SelectOption[]> => {
-  const response =
-    await apiClient.get<ApiResponse<SelectOption[]>>("/variedades/todas");
+export const getVariedadesRequest = async (currentId?: number): Promise<SelectOption[]> => {
+  const params = currentId ? `?current_id=${currentId}` : '';
+  const response = await apiClient.get<ApiResponse<SelectOption[]>>(`/variedades/todas${params}`);
   if (response.data.success) return response.data.data;
   throw new Error("Error obteniendo variedades");
 };
 
-export const getCampaniasActivasRequest = async (): Promise<SelectOption[]> => {
-  const response =
-    await apiClient.get<ApiResponse<SelectOption[]>>("/campanias/activas");
+export const getCampaniasActivasRequest = async (currentId?: number): Promise<SelectOption[]> => {
+  const params = currentId ? `?current_id=${currentId}` : '';
+  const response = await apiClient.get<ApiResponse<SelectOption[]>>(`/campanias/activas${params}`);
   if (response.data.success) return response.data.data;
   throw new Error("Error obteniendo campañas");
 };

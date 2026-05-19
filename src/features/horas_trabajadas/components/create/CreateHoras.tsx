@@ -38,7 +38,7 @@ export default function CreateHoras({ open, onClose, onSuccess }: Props) {
     resolver: zodResolver(createHorasSchema) as any,
     defaultValues: {
       user_id: 0,
-      cosecha_id: null,
+      cosecha_id: 0,
       fecha: "",
       horas: 8,
       precio_hora: 0,

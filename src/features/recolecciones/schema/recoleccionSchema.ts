@@ -4,7 +4,9 @@ const baseRecoleccionSchema = z.object({
   cosecha_id: z
     .number({ message: "La cosecha es obligatoria" })
     .min(1, "La cosecha es obligatoria"),
-  user_id: z.number().nullable().optional(),
+  user_id: z
+    .number({ message: "El recolector es obligatorio" })
+    .min(1, "El recolector es obligatorio"),
   fecha: z.string().min(1, "La fecha es obligatoria"),
   num_cajas: z
     .number({ message: "El nº de cajas es obligatorio" })

@@ -40,7 +40,7 @@ export default function CreateRecoleccion({ open, onClose, onSuccess }: Props) {
     resolver: zodResolver(createRecoleccionSchema) as any,
     defaultValues: {
       cosecha_id: 0,
-      user_id: null,
+      user_id: 0,
       fecha: "",
       num_cajas: 1,
       kilos_caja: 2.5,

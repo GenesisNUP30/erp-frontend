@@ -5,7 +5,7 @@ import { updatePlantacionSchema } from "../../schema/plantacionSchema";
 import type { PlantacionFormData } from "../../schema/plantacionSchema";
 import type { Plantacion } from "../../types/IPlantaciones";
 import PlantacionFields from "../create/PlantacionFields";
-import useSelectOptions from "../../hooks/useSelectOptions";
+import useSelectOptionsEdit from "../../hooks/useSelectOptionsEdit";
 
 interface Props {
   initialData: Plantacion;
@@ -20,7 +20,11 @@ export default function PlantacionEditForm({
   loading,
   serverErrors,
 }: Props) {
-  const { parcelas, variedades, campanias } = useSelectOptions();
+  const { parcelas, variedades, campanias } = useSelectOptionsEdit({
+    parcelaId: initialData.parcela_id,
+    variedadId: initialData.variedad_id,
+    campaniaId: initialData.campania_id,
+  });
 
   const {
     control,

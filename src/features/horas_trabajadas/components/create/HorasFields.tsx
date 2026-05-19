@@ -81,18 +81,17 @@ export default function HorasFields({
             <FormHelperText>{getError("user_id")}</FormHelperText>
           </FormControl>
 
-          <FormControl sx={{ flex: "1 1 250px" }}>
-            <InputLabel>Cosecha (opcional)</InputLabel>
+          <FormControl
+            error={!!getError("cosecha_id")}
+            sx={{ flex: "1 1 250px" }}
+          >
+            <InputLabel>Cosecha</InputLabel>
             <Controller
               name="cosecha_id"
               control={control}
               render={({ field }) => (
-                <Select
-                  {...field}
-                  label="Cosecha (opcional)"
-                  value={field.value ?? ""}
-                >
-                  <MenuItem value="">Sin cosecha</MenuItem>
+                <Select {...field} label="Cosecha" value={field.value ?? ""}>
+                  <MenuItem value="">Seleccione una cosecha</MenuItem>
                   {cosechas.map((c) => (
                     <MenuItem key={c.id} value={c.id}>
                       {c.nombre_cosecha}
@@ -101,6 +100,7 @@ export default function HorasFields({
                 </Select>
               )}
             />
+            <FormHelperText>{getError("cosecha_id")}</FormHelperText>
           </FormControl>
         </Box>
 

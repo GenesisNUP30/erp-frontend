@@ -1,7 +1,7 @@
 export interface HorasTrabajada {
   id: number;
-  user_id: number | null;
-  cosecha_id: number | null;
+  user_id: number;
+  cosecha_id: number;
   pago_id: number | null;
   fecha: string;
   horas: number;
@@ -14,7 +14,7 @@ export interface HorasTrabajada {
 
 export interface CreateHorasTrabajadaDTO {
   user_id: number;
-  cosecha_id?: number | null;
+  cosecha_id: number;
   pago_id?: number | null;
   fecha: string;
   horas: number;

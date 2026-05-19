@@ -4,7 +4,11 @@ const baseHorasSchema = z.object({
   user_id: z
     .number({ message: "El trabajador es obligatorio" })
     .min(1, "El trabajador es obligatorio"),
-  cosecha_id: z.number().nullable().optional(),
+  cosecha_id: z
+    .number({
+      message: "La cosecha es obligatoria",
+    })
+    .min(1, "La cosecha es obligatoria"),
   fecha: z.string().min(1, "La fecha es obligatoria"),
   horas: z
     .number({ message: "Las horas son obligatorias" })

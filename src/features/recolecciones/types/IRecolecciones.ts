@@ -3,7 +3,7 @@ export type EstadoRecoleccion = "registrada" | "verificada" | "anulada";
 export interface Recoleccion {
   id: number;
   cosecha_id: number;
-  user_id: number | null;
+  user_id: number;
   fecha: string;
   num_cajas: number;
   kilos_caja: number;
@@ -15,7 +15,7 @@ export interface Recoleccion {
 
 export interface CreateRecoleccionDTO {
   cosecha_id: number;
-  user_id?: number | null;
+  user_id: number;
   fecha: string;
   num_cajas: number;
   kilos_caja: number;
