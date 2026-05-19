@@ -4,10 +4,10 @@ import {
   getPlantacionByIdRequest,
   updatePlantacionRequest,
 } from "../services/plantacionService";
-import { mapPlantacionFormToUpdateDTO } from "../mappers/plantacion.mappers";
 import { ROUTES } from "../../../routes/routes";
 import type { Plantacion } from "../types/IPlantaciones";
 import type { PlantacionFormData } from "../schema/plantacionSchema";
+import { mapPlantacionFormToUpdateDTO } from "../mappers/plantaciones.mappers";
 
 export default function useEditPlantacion() {
   const { id } = useParams<{ id: string }>();
@@ -36,7 +36,7 @@ export default function useEditPlantacion() {
       setUpdating(true);
       setServerErrors(null);
       await updatePlantacionRequest(id, mapPlantacionFormToUpdateDTO(data));
-      navigate(ROUTES.PLANTACION);
+      navigate(ROUTES.PLANTACIONES);
     } catch (err: any) {
       if (err.status === 422) setServerErrors(err.errors);
       setUpdating(false);

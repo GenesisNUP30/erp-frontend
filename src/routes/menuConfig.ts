@@ -38,5 +38,12 @@ export const MENU_ITEMS: MenuItem[] = [
     path: ROUTES.CAMPANIAS,
     icon: 'Event',
     roles: ['administrador', 'encargado'],
-  }
+  },
+  {
+    title: 'Plantaciones',
+    path: ROUTES.PLANTACIONES,
+    icon: 'Toys',
+    roles: ['administrador', 'encargado'],
+  },
+
 ];
