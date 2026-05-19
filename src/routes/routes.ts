@@ -27,4 +27,24 @@ export const ROUTES = {
   PLANTACIONES: "/plantaciones", // Ruta para la lista
   PLANTACION_DETAILS: "/plantaciones/detalles/:id", // Ruta para el detalle
   PLANTACION_EDIT: "/plantaciones/editar/:id", // Ruta para el editar
+
+  // Cosechas
+  COSECHAS: "/cosechas",
+  COSECHA_DETAILS: "/cosechas/detalles/:id",
+  COSECHA_EDIT: "/cosechas/editar/:id",
+
+  // Recolecciones
+  RECOLECCIONES: "/recolecciones",
+  RECOLECCION_DETAILS: "/recolecciones/detalles/:id",
+  RECOLECCION_EDIT: "/recolecciones/editar/:id",
+
+  // Horas Trabajadas
+  HORAS_TRABAJADAS: "/horas-trabajadas",
+  HORAS_DETAILS: "/horas-trabajadas/detalles/:id",
+  HORAS_EDIT: "/horas-trabajadas/editar/:id",
+
+  // Pagos
+  PAGOS: "/pagos",
+  PAGO_DETAILS: "/pagos/detalles/:id",
+  PAGO_EDIT: "/pagos/editar/:id",
 } as const;

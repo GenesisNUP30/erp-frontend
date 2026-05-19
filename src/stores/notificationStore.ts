@@ -17,12 +17,9 @@ export const useNotificationStore = create<NotificationState>((set, get) => ({
   isBlocked: false,
 
   postNotification: (message, type = 'success', action) => {
-    // 🔹 Evita mostrar múltiples notificaciones al mismo tiempo
+    // Evita mostrar múltiples notificaciones al mismo tiempo
     if (get().isBlocked) return;
-
     set({ isBlocked: true });
-    console.log("Lanzando notificación:", message)
-
     toast.custom((t) => (t.visible ? toastItem(message, type, action) : null), { duration: 3000 });
 
     // Libera después de 3s (coincide con la duración del toast)

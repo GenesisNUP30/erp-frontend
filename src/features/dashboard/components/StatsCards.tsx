@@ -1,6 +1,6 @@
-import Grid from '@mui/material/Grid'; 
-import { Card, CardContent, Typography } from '@mui/material';
-import type { StatItem } from '../types/IDashboard';
+import Grid from "@mui/material/Grid";
+import { Card, CardContent, Typography } from "@mui/material";
+import type { StatItem } from "../types/IDashboard";
 
 interface Props {
   stats: StatItem[];
@@ -16,9 +16,7 @@ export default function StatsCards({ stats }: Props) {
               <Typography variant="body2" color="text.secondary">
                 {stat.title}
               </Typography>
-              <Typography variant="h5">
-                {stat.value}
-              </Typography>
+              <Typography variant="h5">{stat.value}</Typography>
             </CardContent>
           </Card>
         </Grid>

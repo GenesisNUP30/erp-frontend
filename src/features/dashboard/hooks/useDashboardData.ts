@@ -1,24 +1,50 @@
+import { useEffect, useState } from "react";
+import apiClient from "../../../api/apiClient";
+import { useAuthStore } from "../../auth/store/authStore";
+
+interface DashboardData {
+  welcome: string;
+  stats?: Record<string, number>;
+  actividad_reciente?: any[];
+  tareas_hoy?: any[];
+  tareas_pendientes?: any[];
+}
+
 export default function useDashboardData() {
-  const stats = [
-    { title: 'Kilos recolectados hoy', value: 1200 },
-    { title: 'Rutas asignadas', value: 8 },
-  ];
+  const [data, setData] = useState<DashboardData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const token = useAuthStore((state) => state.token);
 
-  const activities = [
-    {
-      id: 1,
-      description: 'Juan Pérez inició una nueva recolección',
-      date: '22/03/2026',
-    },
-    {
-      id: 2,
-      description: 'María López completó una ruta',
-      date: '22/03/2026',
-    },
-  ];
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        setLoading(true);
+        const response = await apiClient.get("/dashboard", {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+        setData(response.data.data);
+      } catch (error) {
+        console.error("Error cargando dashboard:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDashboard();
+  }, [token]);
 
-  return {
-    stats,
-    activities,
-  };
+  // Compatibilidad con los componentes existentes (StatsCards y RecentActivity)
+  const stats = data?.stats
+    ? Object.entries(data.stats).map(([key, value]) => ({
+        title: key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+        value,
+      }))
+    : [];
+
+  const activities = (data?.actividad_reciente ?? []).map((item, i) => ({
+    id: i,
+    description: `Recolección: ${item.num_cajas ?? ""} cajas el ${item.fecha ?? ""}`,
+    date: item.fecha ?? "",
+  }));
+
+  return { stats, activities, welcome: data?.welcome ?? "", loading };
 }
