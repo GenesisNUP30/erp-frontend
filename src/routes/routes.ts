@@ -22,4 +22,9 @@ export const ROUTES = {
   CAMPANIAS: "/campanias", // Ruta para la lista
   CAMPANIA_DETAILS: "/campanias/detalles/:id", // Ruta para el detalle
   CAMPANIA_EDIT: "/campanias/editar/:id", // Ruta para el editar
+
+  // Plantaciones
+  PLANTACIONES: "/plantaciones", // Ruta para la lista
+  PLANTACION_DETAILS: "/plantaciones/detalles/:id", // Ruta para el detalle
+  PLANTACION_EDIT: "/plantaciones/editar/:id", // Ruta para el editar
 } as const;

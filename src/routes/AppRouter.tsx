@@ -16,6 +16,9 @@ import VariedadEditPage from "../features/variedades/pages/VariedadEditPage";
 import CampaniasPage from "../features/campanias/pages/CampaniasPage";
 import CampaniaDetailPage from "../features/campanias/pages/CampaniaDetailPage";
 import CampaniaEditPage from "../features/campanias/pages/CampaniaEditPage";
+import PlantacionesPage from "../features/plantaciones/pages/PlantacionesPage";
+import PlantacionDetailPage from "../features/plantaciones/pages/PlantacionDetailPage";
+import PlantacionEditPage from "../features/plantaciones/pages/PlantacionEditPage";
 
 export default function AppRouter() {
   return (
@@ -38,18 +41,38 @@ export default function AppRouter() {
 
           {/* Parcelas */}
           <Route path={ROUTES.PARCELAS} element={<ParcelasPage />} />
-          <Route path={ROUTES.PARCELA_DETAILS} element={<ParcelaDetailPage />} />
+          <Route
+            path={ROUTES.PARCELA_DETAILS}
+            element={<ParcelaDetailPage />}
+          />
           <Route path={ROUTES.PARCELA_EDIT} element={<ParcelaEditPage />} />
 
           {/* Variedades */}
           <Route path={ROUTES.VARIEDADES} element={<VariedadesPage />} />
-          <Route path={ROUTES.VARIEDAD_DETAILS} element={<VariedadDetailPage />} />
+          <Route
+            path={ROUTES.VARIEDAD_DETAILS}
+            element={<VariedadDetailPage />}
+          />
           <Route path={ROUTES.VARIEDAD_EDIT} element={<VariedadEditPage />} />
 
           {/* Campañas */}
           <Route path={ROUTES.CAMPANIAS} element={<CampaniasPage />} />
-          <Route path={ROUTES.CAMPANIA_DETAILS} element={<CampaniaDetailPage />} />
+          <Route
+            path={ROUTES.CAMPANIA_DETAILS}
+            element={<CampaniaDetailPage />}
+          />
           <Route path={ROUTES.CAMPANIA_EDIT} element={<CampaniaEditPage />} />
+
+          {/* Plantaciones */}
+          <Route path={ROUTES.PLANTACIONES} element={<PlantacionesPage />} />
+          <Route
+            path={ROUTES.PLANTACION_DETAILS}
+            element={<PlantacionDetailPage />}
+          />
+          <Route
+            path={ROUTES.PLANTACION_EDIT}
+            element={<PlantacionEditPage />}
+          />
         </Route>
       </Route>
     </Routes>
