@@ -81,6 +81,27 @@ const validations = {
       updatedSuccess: "¡La campaña ha sido actualizada exitosamente!",
       deletedSuccess: "¡La campaña ha sido eliminada exitosamente!",
     },
+    plantaciones: {
+      singular: "plantación",
+      plural: "plantaciones",
+      labels: {
+        parcela: "Parcela",
+        variedad: "Variedad",
+        campania: "Campaña",
+        fecha_siembra: "Fecha de siembra",
+        fecha_fin: "Fecha de finalización",
+        numero_plantas: "Número de plantas",
+        estado: "Estado",
+      },
+      status: {
+        planificada: "Planificada",
+        activa: "Activa",
+        finalizada: "Finalizada",
+      },
+      createdSuccess: "¡La plantación ha sido creada exitosamente!",
+      updatedSuccess: "¡La plantación ha sido actualizada exitosamente!",
+      deletedSuccess: "¡La plantación ha sido eliminada exitosamente!",
+    },
   },
   tableList: {
     headers: {
@@ -95,6 +116,11 @@ const validations = {
       fecha_fin: "Fecha de fin",
       descripcion: "Descripción",
       tipo: "Tipo",
+      parcela: "Parcela",
+      variedad: "Variedad",
+      campania: "Campaña",
+      fecha_siembra: "Fecha siembra",
+      numero_plantas: "Nº plantas",
     },
   },
   createForm: {
@@ -108,7 +134,7 @@ const validations = {
       edit: "Guardar cambios",
       cancel: "Cancelar",
     },
-    // Errores 
+    // Errores
     errors: {
       nameRequired: "El nombre es obligatorio",
       nameMaxLength: "El nombre no puede superar los 60 caracteres",
