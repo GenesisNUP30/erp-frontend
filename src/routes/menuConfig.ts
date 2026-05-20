@@ -61,12 +61,12 @@ export const MENU_ITEMS: MenuItem[] = [
     title: "Horas trabajadas",
     path: ROUTES.HORAS_TRABAJADAS,
     icon: "AccessTime",
-    roles: ["administrador", "encargado"],
+    roles: ["administrador", "encargado", "recolector"],
   },
   {
     title: "Pagos",
     path: ROUTES.PAGOS,
     icon: "Payments",
-    roles: ["administrador", "encargado"],
+    roles: ["administrador", "encargado", "recolector"],
   },
 ];

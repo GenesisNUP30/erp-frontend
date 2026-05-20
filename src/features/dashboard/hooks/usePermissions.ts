@@ -40,9 +40,11 @@ export default function usePermissions() {
     // Horas trabajadas
     canCreateHoras: isAdmin,
     canDeleteHoras: isAdmin,
+    canEditHoras: isAdmin,
 
     // Pagos
     canCreatePagos: isAdmin,
     canDeletePagos: isAdmin,
+    canEditPagos: isAdmin,
   };
 }

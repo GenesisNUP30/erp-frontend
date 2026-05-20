@@ -25,6 +25,7 @@ interface Props {
   pagos: Pago[];
   loading: boolean;
   canDelete: boolean;
+  canEdit: boolean;
   onViewDetails: (p: Pago) => void;
   onEditPago: (p: Pago) => void;
   onDeletePago: (p: Pago) => void;
@@ -48,6 +49,7 @@ export default function PagosTable({
   pagos,
   loading,
   canDelete,
+  canEdit,
   onViewDetails,
   onEditPago,
   onDeletePago,
@@ -63,7 +65,13 @@ export default function PagosTable({
       loading={loading}
       items={pagos}
       headers={headers}
-      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
+      menuList={
+        canDelete
+          ? ["details", "edit", "delete"]
+          : canEdit
+            ? ["details", "edit"]
+            : ["details"]
+      }
       onDetails={onViewDetails}
       onEdit={onEditPago}
       onDelete={onDeletePago}

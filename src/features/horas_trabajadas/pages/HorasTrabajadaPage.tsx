@@ -13,7 +13,7 @@ import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function HorasTrabajadaPage() {
   const navigate = useNavigate();
-  const { canCreateHoras, canDeleteHoras } = usePermissions();
+  const { canCreateHoras, canDeleteHoras, canEditHoras } = usePermissions();
 
   const {
     horas,
@@ -34,8 +34,12 @@ export default function HorasTrabajadaPage() {
 
   const handleViewDetails = (h: HorasTrabajada) =>
     navigate(ROUTES.HORAS_DETAILS.replace(":id", h.id.toString()));
-  const handleEdit = (h: HorasTrabajada) =>
+
+  const handleEdit = (h: HorasTrabajada) => {
+    if (!canEditHoras) return;
     navigate(ROUTES.HORAS_EDIT.replace(":id", h.id.toString()));
+  };
+
   const handleConfirmDelete = async () => {
     if (!toDelete) return;
     await deleteHoras(toDelete.id);
@@ -61,6 +65,7 @@ export default function HorasTrabajadaPage() {
           horas={horas}
           loading={loading}
           canDelete={canDeleteHoras}
+          canEdit={canEditHoras}
           onViewDetails={handleViewDetails}
           onEditHoras={handleEdit}
           onDeleteHoras={setToDelete}
@@ -73,16 +78,14 @@ export default function HorasTrabajadaPage() {
         />
       )}
 
-      {canCreateHoras && (
-        <CreateHoras
-          open={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSuccess={() => {
-            setIsModalOpen(false);
-            refresh();
-          }}
-        />
-      )}
+      <CreateHoras
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={() => {
+          setIsModalOpen(false);
+          refresh();
+        }}
+      />
 
       <ConfirmDialog
         open={!!toDelete}

@@ -13,7 +13,7 @@ import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function PagosPage() {
   const navigate = useNavigate();
-  const { canCreatePagos, canDeletePagos } = usePermissions();
+  const { canCreatePagos, canDeletePagos, canEditPagos } = usePermissions();
 
   const {
     pagos,
@@ -34,8 +34,12 @@ export default function PagosPage() {
 
   const handleViewDetails = (p: Pago) =>
     navigate(ROUTES.PAGO_DETAILS.replace(":id", p.id.toString()));
-  const handleEdit = (p: Pago) =>
+
+  const handleEdit = (p: Pago) => {
+    if (!canEditPagos) return;
     navigate(ROUTES.PAGO_EDIT.replace(":id", p.id.toString()));
+  };
+
   const handleConfirmDelete = async () => {
     if (!toDelete) return;
     await deletePago(toDelete.id);
@@ -61,6 +65,7 @@ export default function PagosPage() {
           pagos={pagos}
           loading={loading}
           canDelete={canDeletePagos}
+          canEdit={canEditPagos}
           onViewDetails={handleViewDetails}
           onEditPago={handleEdit}
           onDeletePago={setToDelete}

@@ -7,6 +7,7 @@ interface Props {
   horas: HorasTrabajada[];
   loading: boolean;
   canDelete: boolean;
+  canEdit: boolean;
   onViewDetails: (h: HorasTrabajada) => void;
   onEditHoras: (h: HorasTrabajada) => void;
   onDeleteHoras: (h: HorasTrabajada) => void;
@@ -32,6 +33,7 @@ export default function HorasTable({
   horas,
   loading,
   canDelete,
+  canEdit,
   onViewDetails,
   onEditHoras,
   onDeleteHoras,
@@ -47,7 +49,13 @@ export default function HorasTable({
       loading={loading}
       items={horas}
       headers={headers}
-      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
+      menuList={
+        canDelete
+          ? ["details", "edit", "delete"]
+          : canEdit
+            ? ["details", "edit"]
+            : ["details"]
+      }
       onDetails={onViewDetails}
       onEdit={onEditHoras}
       onDelete={onDeleteHoras}
