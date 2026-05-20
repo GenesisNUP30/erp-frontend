@@ -92,7 +92,7 @@ export default function PagosPage() {
       <ConfirmDialog
         open={!!toDelete}
         title="¿Eliminar pago?"
-        description="Solo puedes eliminar pagos en estado borrador. Las horas asociadas quedarán sin pago asignado."
+        description="Al eliminar este pago, las horas trabajadas asociadas quedarán sin pago asignado."
         confirmLabel="Eliminar"
         loading={deleting}
         onConfirm={handleConfirmDelete}
