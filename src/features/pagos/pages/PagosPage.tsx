@@ -19,8 +19,6 @@ export default function PagosPage() {
     pagos,
     search,
     setSearch,
-    filterEstado,
-    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -55,10 +53,8 @@ export default function PagosPage() {
       </Typography>
       <PagosFilters
         search={search}
-        filterEstado={filterEstado}
-        onFilterEstadoChange={setFilterEstado}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreatePagos ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
