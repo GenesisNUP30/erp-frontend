@@ -9,6 +9,7 @@ import { plantacionStatusOptions } from "../../constants/plantacionStatusOption"
 interface Props {
   plantaciones: Plantacion[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (plantacion: Plantacion) => void;
   onEditPlantacion: (plantacion: Plantacion) => void;
   onDeletePlantacion: (plantacion: Plantacion) => void;
@@ -23,6 +24,7 @@ interface Props {
 export default function PlantacionesTable({
   plantaciones,
   loading,
+  canDelete,
   onViewDetails,
   onEditPlantacion,
   onDeletePlantacion,
@@ -47,7 +49,7 @@ export default function PlantacionesTable({
       loading={loading}
       items={plantaciones}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditPlantacion}
       onDelete={onDeletePlantacion}

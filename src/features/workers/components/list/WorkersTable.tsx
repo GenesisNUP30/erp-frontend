@@ -4,11 +4,12 @@ import type { HeaderOption } from "../../../../components/shared/tables/types";
 import type { Worker } from "../../types/IWorkers";
 import v from "../../../../validations/validations";
 import StatusChip from "../../../../components/shared/StatusChip";
-import { workerStatusOptions } from '../../constants/workerStatusOptions';
+import { workerStatusOptions } from "../../constants/workerStatusOptions";
 
 interface Props {
   workers: Worker[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (worker: Worker) => void;
   onEditWorker: (worker: Worker) => void;
   onDeleteWorker: (worker: Worker) => void;
@@ -23,6 +24,7 @@ interface Props {
 export default function WorkersTable({
   workers,
   loading,
+  canDelete,
   onViewDetails,
   onEditWorker,
   onDeleteWorker,
@@ -46,7 +48,7 @@ export default function WorkersTable({
       loading={loading}
       items={workers}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditWorker}
       onDelete={onDeleteWorker}

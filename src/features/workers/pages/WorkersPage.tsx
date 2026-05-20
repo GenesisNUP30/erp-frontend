@@ -9,13 +9,20 @@ import useDeleteWorker from "../hooks/useDeleteWorker";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import { useState } from "react";
 import type { Worker } from "../types/IWorkers";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function WorkersPage() {
   const navigate = useNavigate();
+  const { canCreateWorkers, canDeleteWorkers } = usePermissions();
+
   const {
     workers,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
+    filterRol,
+    setFilterRol,
     loading,
     refresh,
     currentPage,
@@ -29,7 +36,6 @@ export default function WorkersPage() {
   const [workerToDelete, setWorkerToDelete] = useState<Worker | null>(null);
   const { deleteWorker, loading: deleting } = useDeleteWorker(refresh);
 
-  const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
   // Lógica para ir al detalle
@@ -69,7 +75,11 @@ export default function WorkersPage() {
       <WorkersFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={handleOpenModal}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
+        filterRol={filterRol}
+        onFilterRolChange={setFilterRol}
+        onAddClick={() => setIsModalOpen(true)}
       />
 
       {/* CONTENIDO */}
@@ -81,6 +91,7 @@ export default function WorkersPage() {
         <WorkersTable
           workers={workers}
           loading={loading}
+          canDelete={canDeleteWorkers}
           onViewDetails={handleViewDetails}
           onEditWorker={handleEditWorker}
           onDeleteWorker={handleDeleteClick}
@@ -94,11 +105,13 @@ export default function WorkersPage() {
       )}
 
       {/* MODAL DE CREACIÓN */}
-      <CreateWorker
-        open={isModalOpen}
-        onClose={handleCloseModal}
-        onSuccess={handleSuccess}
-      />
+      {canCreateWorkers && (
+        <CreateWorker
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          onSuccess={handleSuccess}
+        />
+      )}
 
       {/* Diálogo de confirmación */}
       <ConfirmDialog

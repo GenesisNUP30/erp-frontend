@@ -1,5 +1,5 @@
-import type { Role } from '../constants/roles';
-import { ROUTES } from './routes';
+import type { Role } from "../constants/roles";
+import { ROUTES } from "./routes";
 
 export interface MenuItem {
   title: string;
@@ -10,40 +10,63 @@ export interface MenuItem {
 
 export const MENU_ITEMS: MenuItem[] = [
   {
-    title: 'Dashboard',
+    title: "Dashboard",
     path: ROUTES.DASHBOARD,
-    icon: 'Dashboard',
-    roles: ['administrador', 'encargado', 'recolector'],
+    icon: "Dashboard",
+    roles: ["administrador", "encargado", "recolector"],
   },
   {
-    title: 'Trabajadores',
+    title: "Trabajadores",
     path: ROUTES.WORKERS,
-    icon: 'People',
-    roles: ['administrador', 'encargado'],
+    icon: "People",
+    roles: ["administrador", "encargado"],
   },
   {
-    title: 'Parcelas',
+    title: "Parcelas",
     path: ROUTES.PARCELAS,
-    icon: 'GridView',
-    roles: ['administrador', 'encargado'],
+    icon: "GridView",
+    roles: ["administrador", "encargado"],
   },
   {
-    title: 'Variedades',
+    title: "Variedades",
     path: ROUTES.VARIEDADES,
-    icon: 'ListAlt',
-    roles: ['administrador', 'encargado'],
+    icon: "ListAlt",
+    roles: ["administrador", "encargado"],
   },
   {
-    title: 'Campañas',
+    title: "Campañas",
     path: ROUTES.CAMPANIAS,
-    icon: 'Event',
-    roles: ['administrador', 'encargado'],
+    icon: "Event",
+    roles: ["administrador", "encargado"],
   },
   {
-    title: 'Plantaciones',
+    title: "Plantaciones",
     path: ROUTES.PLANTACIONES,
-    icon: 'Toys',
-    roles: ['administrador', 'encargado'],
+    icon: "Toys",
+    roles: ["administrador", "encargado"],
   },
-
+  {
+    title: "Cosechas",
+    path: ROUTES.COSECHAS,
+    icon: "Agriculture",
+    roles: ["administrador", "encargado"],
+  },
+  {
+    title: "Recolecciones",
+    path: ROUTES.RECOLECCIONES,
+    icon: "Inventory",
+    roles: ["administrador", "encargado"],
+  },
+  {
+    title: "Horas trabajadas",
+    path: ROUTES.HORAS_TRABAJADAS,
+    icon: "AccessTime",
+    roles: ["administrador", "encargado", "recolector"],
+  },
+  {
+    title: "Pagos",
+    path: ROUTES.PAGOS,
+    icon: "Payments",
+    roles: ["administrador", "encargado", "recolector"],
+  },
 ];

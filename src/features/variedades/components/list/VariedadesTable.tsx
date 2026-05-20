@@ -10,6 +10,7 @@ interface Props {
   onViewDetails: (variedad: Variedad) => void;
   onEditVariedad: (variedad: Variedad) => void;
   onDeleteVariedad: (variedad: Variedad) => void;
+  canDelete: boolean;
   currentPage: number;
   lastPage: number;
   perPage: number;
@@ -24,6 +25,7 @@ export default function VariedadesTable({
   onViewDetails,
   onEditVariedad,
   onDeleteVariedad,
+  canDelete,
   currentPage,
   lastPage,
   perPage,
@@ -41,7 +43,7 @@ export default function VariedadesTable({
       loading={loading}
       items={variedades}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditVariedad}
       onDelete={onDeleteVariedad}

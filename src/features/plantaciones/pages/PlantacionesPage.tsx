@@ -9,13 +9,18 @@ import PlantacionesTable from "../components/list/PlantacionesTable";
 import CreatePlantacion from "../components/create/CreatePlantacion";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Plantacion } from "../types/IPlantaciones";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function PlantacionesPage() {
   const navigate = useNavigate();
+  const { canCreatePlantaciones, canDeletePlantaciones } = usePermissions();
+
   const {
     plantaciones,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -52,6 +57,8 @@ export default function PlantacionesPage() {
       <PlantacionesFilters
         search={search}
         onSearchChange={setSearch}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
         onAddClick={() => setIsModalOpen(true)}
       />
       {loading ? (
@@ -71,16 +78,21 @@ export default function PlantacionesPage() {
           total={total}
           onPageChange={onPageChange}
           onPerPageChange={onPerPageChange}
+          canDelete={canDeletePlantaciones}
         />
       )}
-      <CreatePlantacion
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+      
+      {canCreatePlantaciones && (
+        <CreatePlantacion
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+
       <ConfirmDialog
         open={!!plantacionToDelete}
         title="¿Eliminar plantación?"

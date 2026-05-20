@@ -19,15 +19,10 @@ export default function useLogin() {
         login: data.login,
         password: data.password,
       });
-      console.log("Respuesta API:", response);
-
       // 2. Guardar datos en el Store y LocalStorage
       setAuth(response.user, response.token, data.remember);
-
       // 3. Redirigir al Dashboard inmediatamente
-      console.log("Navegando a:", ROUTES.DASHBOARD);
       navigate(ROUTES.DASHBOARD, { replace: true });
-
       return response;
     } catch (error) {
       console.error("Error en el proceso de Login:", error);

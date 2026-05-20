@@ -9,13 +9,18 @@ import CampaniasTable from "../components/list/CampaniasTable";
 import CreateCampania from "../components/create/CreateCampania";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Campania } from "../types/ICampanias";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function CampaniasPage() {
   const navigate = useNavigate();
+  const { canCreateCampanias, canDeleteCampanias } = usePermissions();
+
   const {
     campanias,
     search,
-    setSearch,
+    setSearch, 
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -51,6 +56,8 @@ export default function CampaniasPage() {
       <CampaniasFilters
         search={search}
         onSearchChange={setSearch}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
         onAddClick={() => setIsModalOpen(true)}
       />
       {loading ? (
@@ -61,6 +68,7 @@ export default function CampaniasPage() {
         <CampaniasTable
           campanias={campanias}
           loading={loading}
+          canDelete={canDeleteCampanias}
           onViewDetails={handleViewDetails}
           onEditCampania={handleEditCampania}
           onDeleteCampania={setCampaniaToDelete}
@@ -69,17 +77,21 @@ export default function CampaniasPage() {
           perPage={perPage}
           total={total}
           onPageChange={onPageChange}
-          onPerPageChange={onPerPageChange} 
+          onPerPageChange={onPerPageChange}
         />
       )}
-      <CreateCampania
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+
+      {canCreateCampanias && (
+        <CreateCampania
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+
       <ConfirmDialog
         open={!!campaniaToDelete}
         title="¿Eliminar campaña?"

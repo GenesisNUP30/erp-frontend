@@ -1,5 +1,5 @@
-import { List, ListItem, ListItemText, Typography } from '@mui/material';
-import type { ActivityItem } from '../types/IDashboard';
+import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import type { ActivityItem } from "../types/IDashboard";
 
 interface Props {
   activities: ActivityItem[];

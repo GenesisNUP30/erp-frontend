@@ -5,6 +5,7 @@ import { getPlantacionesRequest } from "../services/plantacionService";
 export default function usePlantaciones() {
   const [plantaciones, setPlantaciones] = useState<Plantacion[]>([]);
   const [search, setSearch] = useState("");
+  const [filterEstado, setFilterEstado] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
@@ -29,7 +30,7 @@ export default function usePlantaciones() {
   };
 
   useEffect(() => {
-    fetchPlantaciones(1, 5);
+    fetchPlantaciones(currentPage, perPage);
   }, []);
 
   const onPageChange = (page: number) => {
@@ -42,17 +43,21 @@ export default function usePlantaciones() {
     fetchPlantaciones(1, pp);
   };
 
-  const filteredPlantaciones = plantaciones.filter(
-    (p) =>
-      p.parcela?.nombre.toLowerCase().includes(search.toLowerCase()) ||
-      p.variedad?.nombre.toLowerCase().includes(search.toLowerCase()) ||
-      p.campania?.nombre.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredPlantaciones = plantaciones.filter((p) => {
+    const matchSearch =
+      p.parcela?.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+      p.variedad?.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+      p.campania?.nombre?.toLowerCase().includes(search.toLowerCase());
+    const matchEstado = filterEstado ? p.estado === filterEstado : true;
+    return (matchSearch ?? false) && matchEstado;
+  });
 
   return {
     plantaciones: filteredPlantaciones,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh: () => fetchPlantaciones(currentPage, perPage),
     currentPage,

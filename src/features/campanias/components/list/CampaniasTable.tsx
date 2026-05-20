@@ -9,6 +9,7 @@ import v from "../../../../validations/validations";
 interface Props {
   campanias: Campania[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (campania: Campania) => void;
   onEditCampania: (campania: Campania) => void;
   onDeleteCampania: (campania: Campania) => void;
@@ -23,6 +24,7 @@ interface Props {
 export default function CampaniasTable({
   campanias,
   loading,
+  canDelete,
   onViewDetails,
   onEditCampania,
   onDeleteCampania,
@@ -45,7 +47,7 @@ export default function CampaniasTable({
       loading={loading}
       items={campanias}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditCampania}
       onDelete={onDeleteCampania}

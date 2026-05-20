@@ -5,8 +5,8 @@ import { getCampaniasRequest } from "../services/campaniaService";
 export default function useCampanias() {
   const [campanias, setCampanias] = useState<Campania[]>([]);
   const [search, setSearch] = useState("");
+  const [filterEstado, setFilterEstado] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
   const [meta, setMeta] = useState({
@@ -33,25 +33,30 @@ export default function useCampanias() {
     fetchCampanias(currentPage, perPage);
   }, []);
 
-  // Al cambiar página o perPage:
   const onPageChange = (page: number) => {
     setCurrentPage(page);
     fetchCampanias(page, perPage);
   };
+
   const onPerPageChange = (pp: number) => {
     setPerPage(pp);
     setCurrentPage(1);
     fetchCampanias(1, pp);
   };
 
-  const filteredCampanias = campanias.filter((c) =>
-    c.nombre.toLowerCase().includes(search.toLowerCase()),
-  );
+  // Filtrado local — sobre los datos ya cargados de la página actual
+  const filteredCampanias = campanias.filter((c) => {
+    const matchSearch = c.nombre.toLowerCase().includes(search.toLowerCase());
+    const matchEstado = filterEstado ? c.estado === filterEstado : true;
+    return matchSearch && matchEstado;
+  });
 
   return {
     campanias: filteredCampanias,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh: () => fetchCampanias(currentPage, perPage),
     currentPage,

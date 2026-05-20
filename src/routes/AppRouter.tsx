@@ -19,6 +19,18 @@ import CampaniaEditPage from "../features/campanias/pages/CampaniaEditPage";
 import PlantacionesPage from "../features/plantaciones/pages/PlantacionesPage";
 import PlantacionDetailPage from "../features/plantaciones/pages/PlantacionDetailPage";
 import PlantacionEditPage from "../features/plantaciones/pages/PlantacionEditPage";
+import CosechasPage from "../features/cosechas/pages/CosechasPage";
+import CosechaDetailPage from "../features/cosechas/pages/CosechaDetailPage";
+import CosechaEditPage from "../features/cosechas/pages/CosechaEditPage";
+import RecoleccionesPage from "../features/recolecciones/pages/RecoleccionesPage";
+import RecoleccionDetailPage from "../features/recolecciones/pages/RecoleccionDetailPage";
+import RecoleccionEditPage from "../features/recolecciones/pages/RecoleccionEditPage";
+import HorasTrabajadaPage from "../features/horas_trabajadas/pages/HorasTrabajadaPage";
+import HorasDetailPage from "../features/horas_trabajadas/pages/HorasDetailPage";
+import HorasEditPage from "../features/horas_trabajadas/pages/HorasEditPage";
+import PagosPage from "../features/pagos/pages/PagosPage";
+import PagoDetailPage from "../features/pagos/pages/PagoDetailPage";
+import PagoEditPage from "../features/pagos/pages/PagoEditPage";
 
 export default function AppRouter() {
   return (
@@ -73,6 +85,36 @@ export default function AppRouter() {
             path={ROUTES.PLANTACION_EDIT}
             element={<PlantacionEditPage />}
           />
+          {/* Cosechas */}
+          <Route path={ROUTES.COSECHAS} element={<CosechasPage />} />
+          <Route
+            path={ROUTES.COSECHA_DETAILS}
+            element={<CosechaDetailPage />}
+          />
+          <Route path={ROUTES.COSECHA_EDIT} element={<CosechaEditPage />} />
+
+          {/* Recolecciones */}
+          <Route path={ROUTES.RECOLECCIONES} element={<RecoleccionesPage />} />
+          <Route
+            path={ROUTES.RECOLECCION_DETAILS}
+            element={<RecoleccionDetailPage />}
+          />
+          <Route
+            path={ROUTES.RECOLECCION_EDIT}
+            element={<RecoleccionEditPage />}
+          />
+          {/* Horas Trabajadas */}
+          <Route
+            path={ROUTES.HORAS_TRABAJADAS}
+            element={<HorasTrabajadaPage />}
+          />
+          <Route path={ROUTES.HORAS_DETAILS} element={<HorasDetailPage />} />
+          <Route path={ROUTES.HORAS_EDIT} element={<HorasEditPage />} />
+
+          {/* Pagos */}
+          <Route path={ROUTES.PAGOS} element={<PagosPage />} />
+          <Route path={ROUTES.PAGO_DETAILS} element={<PagoDetailPage />} />
+          <Route path={ROUTES.PAGO_EDIT} element={<PagoEditPage />} />
         </Route>
       </Route>
     </Routes>
