@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 interface Props {
   search: string;
   onSearchChange: (v: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
 }
 
 export default function HorasFilters({
@@ -20,9 +20,11 @@ export default function HorasFilters({
         onChange={(e) => onSearchChange(e.target.value)}
         fullWidth
       />
-      <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
-        Registrar horas
-      </Button>
+      {onAddClick && (
+        <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
+          Registrar horas
+        </Button>
+      )}
     </Box>
   );
 }

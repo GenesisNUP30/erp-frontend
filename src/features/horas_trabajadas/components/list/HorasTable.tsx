@@ -6,6 +6,7 @@ import type { HorasTrabajada } from "../../types/IHorasTrabajadas";
 interface Props {
   horas: HorasTrabajada[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (h: HorasTrabajada) => void;
   onEditHoras: (h: HorasTrabajada) => void;
   onDeleteHoras: (h: HorasTrabajada) => void;
@@ -30,6 +31,7 @@ const headers: HeaderOption[] = [
 export default function HorasTable({
   horas,
   loading,
+  canDelete,
   onViewDetails,
   onEditHoras,
   onDeleteHoras,
@@ -45,7 +47,7 @@ export default function HorasTable({
       loading={loading}
       items={horas}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditHoras}
       onDelete={onDeleteHoras}

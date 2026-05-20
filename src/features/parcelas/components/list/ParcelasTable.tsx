@@ -9,6 +9,7 @@ import v from "../../../../validations/validations";
 interface Props {
   parcelas: Parcela[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (parcela: Parcela) => void;
   onEditParcela: (parcela: Parcela) => void;
   onDeleteParcela: (parcela: Parcela) => void;
@@ -23,6 +24,7 @@ interface Props {
 export default function ParcelasTable({
   parcelas,
   loading,
+  canDelete,
   onViewDetails,
   onEditParcela,
   onDeleteParcela,
@@ -45,7 +47,7 @@ export default function ParcelasTable({
       loading={loading}
       items={parcelas}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditParcela}
       onDelete={onDeleteParcela}

@@ -9,9 +9,12 @@ import PlantacionesTable from "../components/list/PlantacionesTable";
 import CreatePlantacion from "../components/create/CreatePlantacion";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Plantacion } from "../types/IPlantaciones";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function PlantacionesPage() {
   const navigate = useNavigate();
+  const { canCreate, canDelete } = usePermissions();
+
   const {
     plantaciones,
     search,
@@ -52,7 +55,7 @@ export default function PlantacionesPage() {
       <PlantacionesFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreate ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -71,16 +74,21 @@ export default function PlantacionesPage() {
           total={total}
           onPageChange={onPageChange}
           onPerPageChange={onPerPageChange}
+          canDelete={canDelete}
         />
       )}
-      <CreatePlantacion
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+      
+      {canCreate && (
+        <CreatePlantacion
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+
       <ConfirmDialog
         open={!!plantacionToDelete}
         title="¿Eliminar plantación?"

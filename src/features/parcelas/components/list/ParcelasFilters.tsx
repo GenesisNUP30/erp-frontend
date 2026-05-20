@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 interface Props {
   search: string;
   onSearchChange: (value: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
 }
 
 export default function ParcelasFilters({ search, onSearchChange, onAddClick }: Props) {
@@ -16,9 +16,11 @@ export default function ParcelasFilters({ search, onSearchChange, onAddClick }: 
         onChange={(e) => onSearchChange(e.target.value)}
         fullWidth
       />
-      <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
-        Crear parcela
-      </Button>
+      {onAddClick && (
+        <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
+          Crear parcela
+        </Button>
+      )}
     </Box>
   );
 }

@@ -24,6 +24,7 @@ const MESES = [
 interface Props {
   pagos: Pago[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (p: Pago) => void;
   onEditPago: (p: Pago) => void;
   onDeletePago: (p: Pago) => void;
@@ -46,6 +47,7 @@ const headers: HeaderOption[] = [
 export default function PagosTable({
   pagos,
   loading,
+  canDelete,
   onViewDetails,
   onEditPago,
   onDeletePago,
@@ -61,7 +63,7 @@ export default function PagosTable({
       loading={loading}
       items={pagos}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditPago}
       onDelete={onDeletePago}

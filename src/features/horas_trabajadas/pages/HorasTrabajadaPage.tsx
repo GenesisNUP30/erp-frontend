@@ -9,9 +9,12 @@ import HorasTable from "../components/list/HorasTable";
 import CreateHoras from "../components/create/CreateHoras";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { HorasTrabajada } from "../types/IHorasTrabajadas";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function HorasTrabajadaPage() {
   const navigate = useNavigate();
+  const { canCreateHoras, canDeleteHoras } = usePermissions();
+
   const {
     horas,
     search,
@@ -47,7 +50,7 @@ export default function HorasTrabajadaPage() {
       <HorasFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreateHoras ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -57,6 +60,7 @@ export default function HorasTrabajadaPage() {
         <HorasTable
           horas={horas}
           loading={loading}
+          canDelete={canDeleteHoras}
           onViewDetails={handleViewDetails}
           onEditHoras={handleEdit}
           onDeleteHoras={setToDelete}
@@ -68,14 +72,18 @@ export default function HorasTrabajadaPage() {
           onPerPageChange={onPerPageChange}
         />
       )}
-      <CreateHoras
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+
+      {canCreateHoras && (
+        <CreateHoras
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+
       <ConfirmDialog
         open={!!toDelete}
         title="¿Eliminar registro de horas?"

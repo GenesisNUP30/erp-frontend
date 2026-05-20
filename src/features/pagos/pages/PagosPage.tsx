@@ -9,9 +9,12 @@ import PagosTable from "../components/list/PagosTable";
 import CreatePago from "../components/create/CreatePago";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Pago } from "../types/IPagos";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function PagosPage() {
   const navigate = useNavigate();
+  const { canCreatePagos, canDeletePagos } = usePermissions();
+
   const {
     pagos,
     search,
@@ -47,7 +50,7 @@ export default function PagosPage() {
       <PagosFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreatePagos ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -57,6 +60,7 @@ export default function PagosPage() {
         <PagosTable
           pagos={pagos}
           loading={loading}
+          canDelete={canDeletePagos}
           onViewDetails={handleViewDetails}
           onEditPago={handleEdit}
           onDeletePago={setToDelete}
@@ -68,14 +72,18 @@ export default function PagosPage() {
           onPerPageChange={onPerPageChange}
         />
       )}
-      <CreatePago
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+
+      {canCreatePagos && (
+        <CreatePago
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+      
       <ConfirmDialog
         open={!!toDelete}
         title="¿Eliminar pago?"

@@ -9,9 +9,12 @@ import CosechasTable from "../components/list/CosechasTable";
 import CreateCosecha from "../components/create/CreateCosecha";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Cosecha } from "../types/ICosechas";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function CosechasPage() {
   const navigate = useNavigate();
+  const { canCreateCosechas, canDeleteCosechas } = usePermissions();
+
   const {
     cosechas,
     search,
@@ -47,7 +50,7 @@ export default function CosechasPage() {
       <CosechasFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreateCosechas ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -57,6 +60,7 @@ export default function CosechasPage() {
         <CosechasTable
           cosechas={cosechas}
           loading={loading}
+          canDelete={canDeleteCosechas}
           onViewDetails={handleViewDetails}
           onEditCosecha={handleEdit}
           onDeleteCosecha={setCosechaToDelete}
@@ -68,14 +72,18 @@ export default function CosechasPage() {
           onPerPageChange={onPerPageChange}
         />
       )}
-      <CreateCosecha
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+
+      {canCreateCosechas && (
+        <CreateCosecha
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+
       <ConfirmDialog
         open={!!cosechaToDelete}
         title="¿Eliminar cosecha?"

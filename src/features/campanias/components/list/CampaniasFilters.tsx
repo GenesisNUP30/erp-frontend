@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 interface Props {
   search: string;
   onSearchChange: (value: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
 }
 
 export default function CampaniasFilters({
@@ -20,9 +20,11 @@ export default function CampaniasFilters({
         onChange={(e) => onSearchChange(e.target.value)}
         fullWidth
       />
-      <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
-        Crear campaña
-      </Button>
+      {onAddClick && (
+        <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
+          Crear campaña
+        </Button>
+      )}
     </Box>
   );
 }

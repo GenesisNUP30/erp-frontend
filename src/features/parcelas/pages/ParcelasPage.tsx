@@ -9,9 +9,12 @@ import ParcelasTable from "../components/list/ParcelasTable";
 import CreateParcela from "../components/create/CreateParcela";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Parcela } from "../types/IParcelas";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function ParcelasPage() {
   const navigate = useNavigate();
+  const { canCreateParcelas, canDeleteParcelas } = usePermissions();
+
   const {
     parcelas,
     search,
@@ -25,7 +28,7 @@ export default function ParcelasPage() {
     onPageChange,
     onPerPageChange,
   } = useParcelas();
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [parcelaToDelete, setParcelaToDelete] = useState<Parcela | null>(null);
   const { deleteParcela, loading: deleting } = useDeleteParcela(refresh);
@@ -51,7 +54,7 @@ export default function ParcelasPage() {
       <ParcelasFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreateParcelas ? () => setIsModalOpen(true) : undefined}
       />
 
       {loading ? (
@@ -62,6 +65,7 @@ export default function ParcelasPage() {
         <ParcelasTable
           parcelas={parcelas}
           loading={loading}
+          canDelete={canDeleteParcelas}
           onViewDetails={handleViewDetails}
           onEditParcela={handleEditParcela}
           onDeleteParcela={setParcelaToDelete}
@@ -74,14 +78,16 @@ export default function ParcelasPage() {
         />
       )}
 
-      <CreateParcela
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+      {canCreateParcelas && (
+        <CreateParcela
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
 
       <ConfirmDialog
         open={!!parcelaToDelete}

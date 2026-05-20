@@ -8,6 +8,7 @@ import { cosechaStatusOptions } from "../../constants/cosechaStatusOptions";
 interface Props {
   cosechas: Cosecha[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (c: Cosecha) => void;
   onEditCosecha: (c: Cosecha) => void;
   onDeleteCosecha: (c: Cosecha) => void;
@@ -30,6 +31,7 @@ const headers: HeaderOption[] = [
 export default function CosechasTable({
   cosechas,
   loading,
+  canDelete,
   onViewDetails,
   onEditCosecha,
   onDeleteCosecha,
@@ -45,7 +47,7 @@ export default function CosechasTable({
       loading={loading}
       items={cosechas}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditCosecha}
       onDelete={onDeleteCosecha}

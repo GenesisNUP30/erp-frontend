@@ -9,9 +9,12 @@ import CampaniasTable from "../components/list/CampaniasTable";
 import CreateCampania from "../components/create/CreateCampania";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Campania } from "../types/ICampanias";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function CampaniasPage() {
   const navigate = useNavigate();
+  const { canCreateCampanias, canDeleteCampanias } = usePermissions();
+
   const {
     campanias,
     search,
@@ -51,7 +54,7 @@ export default function CampaniasPage() {
       <CampaniasFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreateCampanias ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -61,6 +64,7 @@ export default function CampaniasPage() {
         <CampaniasTable
           campanias={campanias}
           loading={loading}
+          canDelete={canDeleteCampanias}
           onViewDetails={handleViewDetails}
           onEditCampania={handleEditCampania}
           onDeleteCampania={setCampaniaToDelete}
@@ -72,14 +76,18 @@ export default function CampaniasPage() {
           onPerPageChange={onPerPageChange} 
         />
       )}
-      <CreateCampania
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+      
+      {canCreateCampanias && (
+        <CreateCampania
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+
       <ConfirmDialog
         open={!!campaniaToDelete}
         title="¿Eliminar campaña?"

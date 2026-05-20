@@ -9,9 +9,12 @@ import useDeleteWorker from "../hooks/useDeleteWorker";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import { useState } from "react";
 import type { Worker } from "../types/IWorkers";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function WorkersPage() {
   const navigate = useNavigate();
+  const { canCreate, canDelete } = usePermissions();
+
   const {
     workers,
     search,
@@ -69,7 +72,7 @@ export default function WorkersPage() {
       <WorkersFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={handleOpenModal}
+        onAddClick={canCreate ? handleOpenModal : undefined}
       />
 
       {/* CONTENIDO */}
@@ -81,6 +84,7 @@ export default function WorkersPage() {
         <WorkersTable
           workers={workers}
           loading={loading}
+          canDelete={canDelete}
           onViewDetails={handleViewDetails}
           onEditWorker={handleEditWorker}
           onDeleteWorker={handleDeleteClick}
@@ -94,11 +98,13 @@ export default function WorkersPage() {
       )}
 
       {/* MODAL DE CREACIÓN */}
-      <CreateWorker
-        open={isModalOpen}
-        onClose={handleCloseModal}
-        onSuccess={handleSuccess}
-      />
+      {canCreate && (
+        <CreateWorker
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          onSuccess={handleSuccess}
+        />
+      )}
 
       {/* Diálogo de confirmación */}
       <ConfirmDialog

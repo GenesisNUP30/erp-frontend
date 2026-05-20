@@ -9,9 +9,12 @@ import VariedadesTable from "../components/list/VariedadesTable";
 import CreateVariedad from "../components/create/CreateVariedad";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Variedad } from "../types/IVariedades";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function VariedadesPage() {
   const navigate = useNavigate();
+  const { canCreateVariedades, canDeleteVariedades } = usePermissions();
+
   const {
     variedades,
     search,
@@ -51,7 +54,7 @@ export default function VariedadesPage() {
       <VariedadesFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={() => setIsModalOpen(true)}
+        onAddClick={canCreateVariedades ? () => setIsModalOpen(true) : undefined}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -61,6 +64,7 @@ export default function VariedadesPage() {
         <VariedadesTable
           variedades={variedades}
           loading={loading}
+          canDelete={canDeleteVariedades}
           onViewDetails={handleViewDetails}
           onEditVariedad={handleEditVariedad}
           onDeleteVariedad={setVariedadToDelete}
@@ -72,14 +76,17 @@ export default function VariedadesPage() {
           onPerPageChange={onPerPageChange}
         />
       )}
-      <CreateVariedad
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSuccess={() => {
-          setIsModalOpen(false);
-          refresh();
-        }}
-      />
+      {canCreateVariedades && (
+        <CreateVariedad
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => {
+            setIsModalOpen(false);
+            refresh();
+          }}
+        />
+      )}
+      
       <ConfirmDialog
         open={!!variedadToDelete}
         title="¿Eliminar variedad?"

@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 interface Props {
   search: string;
   onSearchChange: (value: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
 }
 
 export default function PlantacionesFilters({
@@ -20,9 +20,11 @@ export default function PlantacionesFilters({
         onChange={(e) => onSearchChange(e.target.value)}
         fullWidth
       />
-      <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
-        Crear plantación
-      </Button>
+      {onAddClick && (
+        <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
+          Crear plantación
+        </Button>
+      )}
     </Box>
   );
 }

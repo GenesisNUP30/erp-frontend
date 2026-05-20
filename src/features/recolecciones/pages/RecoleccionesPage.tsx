@@ -9,9 +9,12 @@ import RecoleccionesTable from "../components/list/RecoleccionesTable";
 import CreateRecoleccion from "../components/create/CreateRecoleccion";
 import ConfirmDialog from "../../../components/shared/ConfirmDialog";
 import type { Recoleccion } from "../types/IRecolecciones";
+import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function RecoleccionesPage() {
   const navigate = useNavigate();
+  const { canDeleteRecolecciones } = usePermissions();
+
   const {
     recolecciones,
     search,
@@ -58,6 +61,7 @@ export default function RecoleccionesPage() {
         <RecoleccionesTable
           recolecciones={recolecciones}
           loading={loading}
+          canDelete={canDeleteRecolecciones}
           onViewDetails={handleViewDetails}
           onEditRecoleccion={handleEdit}
           onDeleteRecoleccion={setToDelete}

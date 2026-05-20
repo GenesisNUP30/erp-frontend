@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 interface Props {
   search: string;
   onSearchChange: (value: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
 }
 
 export default function WorkersFilters({
@@ -21,13 +21,15 @@ export default function WorkersFilters({
         fullWidth
       />
 
-      <Button 
-      variant="contained" 
-      startIcon={<AddIcon />}
-      onClick={onAddClick}
-      >
-        Crear trabajador
-      </Button>
+      {onAddClick && (
+        <Button 
+          variant="contained" 
+          startIcon={<AddIcon />}
+          onClick={onAddClick}
+        >
+          Crear trabajador
+        </Button>
+      )}
     </Box>
   );
 }

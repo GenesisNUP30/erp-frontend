@@ -8,6 +8,7 @@ import { recoleccionStatusOptions } from "../../constants/recoleccionStatusOptio
 interface Props {
   recolecciones: Recoleccion[];
   loading: boolean;
+  canDelete: boolean;
   onViewDetails: (r: Recoleccion) => void;
   onEditRecoleccion: (r: Recoleccion) => void;
   onDeleteRecoleccion: (r: Recoleccion) => void;
@@ -31,6 +32,7 @@ const headers: HeaderOption[] = [
 export default function RecoleccionesTable({
   recolecciones,
   loading,
+  canDelete,
   onViewDetails,
   onEditRecoleccion,
   onDeleteRecoleccion,
@@ -46,7 +48,7 @@ export default function RecoleccionesTable({
       loading={loading}
       items={recolecciones}
       headers={headers}
-      menuList={["details", "edit", "delete"]}
+      menuList={canDelete ? ["details", "edit", "delete"] : ["details", "edit"]}
       onDetails={onViewDetails}
       onEdit={onEditRecoleccion}
       onDelete={onDeleteRecoleccion}

@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 interface Props {
   search: string;
   onSearchChange: (v: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
 }
 
 export default function PagosFilters({
@@ -20,9 +20,11 @@ export default function PagosFilters({
         onChange={(e) => onSearchChange(e.target.value)}
         fullWidth
       />
-      <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
-        Crear pago
-      </Button>
+      {onAddClick && (
+        <Button variant="contained" startIcon={<AddIcon />} onClick={onAddClick}>
+          Crear pago
+        </Button>
+      )}
     </Box>
   );
 }
