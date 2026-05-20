@@ -12,6 +12,8 @@ export default function useDeleteHoras(onSuccess: () => void) {
       const response = await deleteHorasRequest(id);
       postNotification(response.message || "Registro eliminado", "success");
       onSuccess();
+      return response;
+      
     } catch (error: any) {
       postNotification(error.message || "Error al eliminar", "error");
       throw error;

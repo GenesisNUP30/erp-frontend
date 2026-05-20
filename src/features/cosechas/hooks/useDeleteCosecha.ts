@@ -12,6 +12,7 @@ export default function useDeleteCosecha(onSuccess: () => void) {
       const response = await deleteCosechaRequest(id);
       postNotification(response.message || "Cosecha eliminada", "success");
       onSuccess();
+      return response;
     } catch (error: any) {
       postNotification(
         error.message || "Error al eliminar la cosecha",

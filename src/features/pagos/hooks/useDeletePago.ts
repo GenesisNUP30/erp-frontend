@@ -12,6 +12,7 @@ export default function useDeletePago(onSuccess: () => void) {
       const response = await deletePagoRequest(id);
       postNotification(response.message || "Pago eliminado", "success");
       onSuccess();
+      return response;
     } catch (error: any) {
       postNotification(error.message || "Error al eliminar el pago", "error");
       throw error;
