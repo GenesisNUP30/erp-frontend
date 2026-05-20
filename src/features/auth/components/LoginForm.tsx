@@ -46,7 +46,7 @@ export default function LoginForm() {
           }}>
             <LocalFlorist sx={{ color: 'white', fontSize: 32 }} />
           </Box>
-          <Typography variant="h5" fontWeight={500}>ERP Agrícola</Typography>
+          <Typography variant="h5" fontWeight={500}>AgroBase</Typography>
           <Typography variant="body2" color="text.secondary" mt={0.5}>
             Gestión de campo de frambuesa
           </Typography>
