@@ -19,6 +19,8 @@ export default function ParcelasPage() {
     parcelas,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -54,7 +56,9 @@ export default function ParcelasPage() {
       <ParcelasFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={canCreateParcelas ? () => setIsModalOpen(true) : undefined}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
+        onAddClick={() => setIsModalOpen(true)}
       />
 
       {loading ? (

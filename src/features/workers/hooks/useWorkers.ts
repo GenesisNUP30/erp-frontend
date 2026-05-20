@@ -5,8 +5,9 @@ import { getWorkersRequest } from "../services/workerService";
 export default function useWorkers() {
   const [workers, setWorkers] = useState<Worker[]>([]);
   const [search, setSearch] = useState("");
+  const [filterEstado, setFilterEstado] = useState("");
+  const [filterRol, setFilterRol] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
   const [meta, setMeta] = useState({
@@ -19,11 +20,10 @@ export default function useWorkers() {
   const fetchWorkers = async (page: number, pp: number) => {
     try {
       setLoading(true);
-
       const { data, meta } = await getWorkersRequest(page, pp);
       setWorkers(data);
       setMeta(meta);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error cargando trabajadores:", error);
     } finally {
       setLoading(false);
@@ -38,21 +38,30 @@ export default function useWorkers() {
     setCurrentPage(page);
     fetchWorkers(page, perPage);
   };
-
   const onPerPageChange = (pp: number) => {
     setPerPage(pp);
     setCurrentPage(1);
     fetchWorkers(1, pp);
   };
 
-  const filteredWorkers = workers.filter((worker) =>
-    worker.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredWorkers = workers.filter((w) => {
+    const matchSearch =
+      w.name?.toLowerCase().includes(search.toLowerCase()) ||
+      w.username?.toLowerCase().includes(search.toLowerCase()) ||
+      w.dni?.toLowerCase().includes(search.toLowerCase());
+    const matchEstado = filterEstado ? w.estado === filterEstado : true;
+    const matchRol = filterRol ? w.rol === filterRol : true;
+    return (matchSearch ?? false) && matchEstado && matchRol;
+  });
 
   return {
     workers: filteredWorkers,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
+    filterRol,
+    setFilterRol,
     loading,
     refresh: () => fetchWorkers(currentPage, perPage),
     currentPage,

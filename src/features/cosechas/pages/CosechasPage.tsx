@@ -19,6 +19,8 @@ export default function CosechasPage() {
     cosechas,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -49,6 +51,8 @@ export default function CosechasPage() {
       </Typography>
       <CosechasFilters
         search={search}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
         onSearchChange={setSearch}
         onAddClick={canCreateCosechas ? () => setIsModalOpen(true) : undefined}
       />

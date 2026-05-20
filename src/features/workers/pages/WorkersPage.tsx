@@ -13,12 +13,16 @@ import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function WorkersPage() {
   const navigate = useNavigate();
-  const { canCreate, canDelete } = usePermissions();
+  const { canCreateWorkers, canDeleteWorkers } = usePermissions();
 
   const {
     workers,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
+    filterRol,
+    setFilterRol,
     loading,
     refresh,
     currentPage,
@@ -32,7 +36,6 @@ export default function WorkersPage() {
   const [workerToDelete, setWorkerToDelete] = useState<Worker | null>(null);
   const { deleteWorker, loading: deleting } = useDeleteWorker(refresh);
 
-  const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
   // Lógica para ir al detalle
@@ -72,7 +75,11 @@ export default function WorkersPage() {
       <WorkersFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={canCreate ? handleOpenModal : undefined}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
+        filterRol={filterRol}
+        onFilterRolChange={setFilterRol}
+        onAddClick={() => setIsModalOpen(true)}
       />
 
       {/* CONTENIDO */}
@@ -84,7 +91,7 @@ export default function WorkersPage() {
         <WorkersTable
           workers={workers}
           loading={loading}
-          canDelete={canDelete}
+          canDelete={canDeleteWorkers}
           onViewDetails={handleViewDetails}
           onEditWorker={handleEditWorker}
           onDeleteWorker={handleDeleteClick}
@@ -98,7 +105,7 @@ export default function WorkersPage() {
       )}
 
       {/* MODAL DE CREACIÓN */}
-      {canCreate && (
+      {canCreateWorkers && (
         <CreateWorker
           open={isModalOpen}
           onClose={handleCloseModal}

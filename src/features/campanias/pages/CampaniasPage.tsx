@@ -18,7 +18,9 @@ export default function CampaniasPage() {
   const {
     campanias,
     search,
-    setSearch,
+    setSearch, 
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -54,7 +56,9 @@ export default function CampaniasPage() {
       <CampaniasFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={canCreateCampanias ? () => setIsModalOpen(true) : undefined}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
+        onAddClick={() => setIsModalOpen(true)}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -73,10 +77,10 @@ export default function CampaniasPage() {
           perPage={perPage}
           total={total}
           onPageChange={onPageChange}
-          onPerPageChange={onPerPageChange} 
+          onPerPageChange={onPerPageChange}
         />
       )}
-      
+
       {canCreateCampanias && (
         <CreateCampania
           open={isModalOpen}

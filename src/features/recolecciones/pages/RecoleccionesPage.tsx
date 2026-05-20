@@ -19,6 +19,8 @@ export default function RecoleccionesPage() {
     recolecciones,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -50,6 +52,8 @@ export default function RecoleccionesPage() {
       </Typography>
       <RecoleccionesFilters
         search={search}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
         onSearchChange={setSearch}
         onAddClick={() => setIsModalOpen(true)}
       />

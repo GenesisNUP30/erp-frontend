@@ -6,6 +6,7 @@ export default function useCosechas() {
   const [cosechas, setCosechas] = useState<Cosecha[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [filterEstado, setFilterEstado] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(5);
   const [meta, setMeta] = useState({
@@ -42,14 +43,19 @@ export default function useCosechas() {
     fetchCosechas(1, pp);
   };
 
-  const filteredCosechas = cosechas.filter((c) =>
-    c.nombre_cosecha.toLowerCase().includes(search.toLowerCase()),
-  );
+  // Filtrado local — sobre los datos ya cargados de la página actual
+  const filteredCosechas = cosechas.filter((c) => {
+    const matchSearch = c.nombre_cosecha.toLowerCase().includes(search.toLowerCase());
+    const matchEstado = filterEstado ? c.estado === filterEstado : true;
+    return matchSearch && matchEstado;
+  });
 
   return {
     cosechas: filteredCosechas,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh: () => fetchCosechas(currentPage, perPage),
     currentPage,

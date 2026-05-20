@@ -13,12 +13,14 @@ import usePermissions from "../../dashboard/hooks/usePermissions";
 
 export default function PlantacionesPage() {
   const navigate = useNavigate();
-  const { canCreate, canDelete } = usePermissions();
+  const { canCreatePlantaciones, canDeletePlantaciones } = usePermissions();
 
   const {
     plantaciones,
     search,
     setSearch,
+    filterEstado,
+    setFilterEstado,
     loading,
     refresh,
     currentPage,
@@ -55,7 +57,9 @@ export default function PlantacionesPage() {
       <PlantacionesFilters
         search={search}
         onSearchChange={setSearch}
-        onAddClick={canCreate ? () => setIsModalOpen(true) : undefined}
+        filterEstado={filterEstado}
+        onFilterEstadoChange={setFilterEstado}
+        onAddClick={() => setIsModalOpen(true)}
       />
       {loading ? (
         <Box display="flex" justifyContent="center" mt={4}>
@@ -74,11 +78,11 @@ export default function PlantacionesPage() {
           total={total}
           onPageChange={onPageChange}
           onPerPageChange={onPerPageChange}
-          canDelete={canDelete}
+          canDelete={canDeletePlantaciones}
         />
       )}
       
-      {canCreate && (
+      {canCreatePlantaciones && (
         <CreatePlantacion
           open={isModalOpen}
           onClose={() => setIsModalOpen(false)}
