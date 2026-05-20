@@ -35,6 +35,7 @@ export default function useDashboardData() {
   // Compatibilidad con los componentes existentes (StatsCards y RecentActivity)
   const stats = data?.stats
     ? Object.entries(data.stats).map(([key, value]) => ({
+        key,
         title: key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
         value,
       }))

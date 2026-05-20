@@ -1,4 +1,5 @@
 export interface StatItem {
+  key: string;
   title: string;
   value: string | number;
 }
